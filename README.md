@@ -13,6 +13,7 @@ Repozitář pro vytváření formuláře na vkládání je k dispozici na
 
 ## Project setup
 **Všechno smazat a vytvořit něco nového, lepšího, funkčního.** Především pak nová věc musí umět:
+* Asi je vhodné pro tvorbu použít meilisearch instantsearch
 * Vyhledávat plaintextem napříč poli
 * Mít menu, (které má i možnost submenu). V menu jsou položky (jako složky) a v těch jsou rozřazené jako listy kategorie. Kategorie (stringy které mají přiřazené továrny) jsou vždy list ve struktuře menu.
   * Při kliknutí na list menu se vyhledají výsledky filtru přes tuto kategorii. (Při kliknutí na "Trička" se vyhledají všechny firmy, které mají alespoň v jedné své továrně kategorii "trička")
