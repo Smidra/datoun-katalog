@@ -6,28 +6,16 @@ Zatím pouze minimal working protoype pro testování vkládání
 Repozitář pro vytváření formuláře na vkládání je k dispozici na
 * https://github.com/Smidra/vyrobky-admin
 
-Tato Vue 3 aplikace je od úpravy (především insertu) dat v Meilisearch databázi českých výrobků.
-Vyvíjím ve Vue 3 + Formkit + Axios
 
 ## TODO
-* [x] Zařídit odeslání JSONu do databáze
-* [x] Zařídit přidávání a odebírání výroben pomocí plus tlačítka.
-* [ ] Potvrdit uživateli odeslání do databáze.
-* [ ] Základně nastylovat aby to trošičku vypadalo.
-* [ ] Jak se budou přidávat ikonky?
-* [ ] Pro jednu výrobnu musí být možno přidat libovolně kategorií
-* [ ] Validace polí na frontendu + validace polí na backendu (jasně definovat požadavky na JSON)
-* [ ] Jak přesně do databáze přidávat obec - Geotag? Jmono obce, poštovní adresa? Asi by se hodilo našeptávání...
-* [ ] Našeptávání -> Tato firma už v databázi je.
-* [ ] Našeptávání -> Měli jste na myslí tuto kategorii?
-* [ ] ID firem jsou nyní sekundy epochy - to je dirty řešení - nastavil jsem ID jako sortable atribut - lze si vzít nejvyšší použité, ale i při tom může dojít ke kolizi
+* [ ] Udělat to celé od píky hezky.
 
 
 ## Project setup
 **Všechno smazat a vytvořit něco nového, lepšího, funkčního.** Především pak nová věc musí umět:
 * Vyhledávat plaintextem napříč poli
 * Mít menu, (které má i možnost submenu). V menu jsou položky (jako složky) a v těch jsou rozřazené jako listy kategorie. Kategorie (stringy které mají přiřazené továrny) jsou vždy list ve struktuře menu.
-  * Při kliknutí na list se vyhledají výsledky filtru přes tuto kategorii. 
+  * Při kliknutí na list menu se vyhledají výsledky filtru přes tuto kategorii. (Při kliknutí na "Trička" se vyhledají všechny firmy, které mají alespoň v jedné své továrně kategorii "trička")
   * Při kliknutí na ne-list ve struktuře menu se vyhledají výsledky filtrované kategoriemi všech listů pod tímto ne-listem ve funkci OR. (Při kliknutí na "oblečení" se vyhledá filtr tento >> trička OR kalhoty OR sukně ...)
 
 ## Databáze
