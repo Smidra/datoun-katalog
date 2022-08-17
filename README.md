@@ -1,10 +1,12 @@
 # Katalog českých výrobků
 
-Zatím pouze minimal working protoype pro testování vkládání
-* Live at > https://smidra.github.io/vyrobky-katalog/dist/ <
+Build KATALOGU na testování (tento repozitář):
+* https://smidra.github.io/vyrobky-katalog/dist/
+* https://github.com/Smidra/vyrobky-katalog (REPO)
 
-Repozitář pro vytváření formuláře na vkládání je k dispozici na
-* https://github.com/Smidra/vyrobky-admin
+Live build ADMIN repozitáře pro vkládání:
+* https://smidra.github.io/vyrobky-admin/
+* https://github.com/Smidra/vyrobky-admin (REPO)
 
 
 ## TODO
