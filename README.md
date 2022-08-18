@@ -36,8 +36,26 @@ Live build ADMIN repozitáře pro vkládání:
 {
     "id": 1,
     "jmeno_firmy": "Alpa",
-    "popisek_firmy": "Historie společnosti ALPA je historií stabilní a prosperující společnosti. Obliba značky ALPA přetrvala dlouhá desetiletí...",
+    "aliasy": [
+      "Francovka",
+      "Lesana",
+      "Luna",
+      "Amica",
+      "Apiko",
+      "Aviril",
+      "Pedik",
+      "Sypsi",
+      "Batole",
+      "Windsor",
+      "Farao",
+      "Fougere",
+      "Chypre",
+      "Classique"
+    ]
+    "popisek_firmy": "Historie společnosti ALPA je historií stabilní a prosperující společnosti. Obliba značky ALPA přetrvala dlouhá desetiletí. Po předválečné etapě výroby v Brně se závod v roce 1948 přestěhoval do Velkého Meziříčí. V roce 1994 proběhla privatizace a společnost ALPA je dnes moderním a perspektivním podnikem. Vlastnictví tradiční české značky a přes 100 let trvající spokojenost našich zákazníků je nejcennějším klenotem, který zdobí značku ALPA.",
     "eshop": "https://www.alpa.cz/cs/e-shop",
+    "logo": "https://www.alpa.cz/images/stories/Aktuality/2017/thumbnails/thumbnails/AL_logoALPA_RGB.jpg",
+    "funguje": true,
     "vyrobny": [
         {
             "lokalita": "Velké Meziříčí",
@@ -46,14 +64,6 @@ Live build ADMIN repozitáře pro vkládání:
                 "Zubní pasty",
                 "Masážní gely",
                 "Holení"
-            ]
-        },
-        {
-            "lokalita": "Malé Meziříčí",
-            "popisek_vyroby": "Žádná výroba se neodehrává v malinké vsi Malé meziříčí",
-            "kategorie": [
-                "Zubní pasty",
-                "Mašinky"
             ]
         }
     ]
