@@ -1,12 +1,12 @@
 # Katalog českých výrobků
 
 Build KATALOGU na testování (tento repozitář):
-* https://smidra.github.io/vyrobky-katalog/dist/
-* https://github.com/Smidra/vyrobky-katalog (REPO)
+* https://smidra.github.io/datoun-katalog/dist/
+* https://github.com/Smidra/datoun-katalog (REPO)
 
 Live build ADMIN repozitáře pro vkládání:
-* https://smidra.github.io/vyrobky-admin/
-* https://github.com/Smidra/vyrobky-admin (REPO)
+* https://admin.datoun.cz
+* https://github.com/Smidra/datoun-admin (REPO)
 
 
 ## TODO
