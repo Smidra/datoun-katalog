@@ -7,12 +7,13 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
-    "@meilisearch/instant-meilisearch": "^0.8.1",
+    "@meilisearch/instant-meilisearch": "^0.8.2",
+    "instantsearch.css": "^7.4.5",
     "vue": "^3.2.37",
-    "vue-instantsearch": "^4.4.2"
+    "vue-instantsearch": "^4.6.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.1",
-    "vite": "^3.0.4"
+    "vite": "^3.2.3"
   }
 }
