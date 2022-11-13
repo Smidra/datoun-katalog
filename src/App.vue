@@ -19,8 +19,12 @@
 
     <!-- LEFT is menu -->
     <div class="w-0 invisible md:visible md:w-1/4">
-      <!-- <ais-menu class="hidden menu bg-base-100 w-56 p-2 rounded-box text-primary" attribute="vyrobny.kategorie" /> -->
-      <ais-menu class="dark:text-base-content menu bg-base-100 rounded-box text-primary" attribute="vyrobny.kategorie" />
+      <ais-hierarchical-menu class="dark:text-base-content menu text-primary"
+      :attributes="['vyrobny.kategorie']" show-more>
+      <template v-slot:showMoreLabel="{ isShowingMore }">
+        {{ isShowingMore ? 'Méně kategorií' : 'Další kategorie' }}
+      </template>
+      </ais-hierarchical-menu>
     </div>
 
     <!-- RIGHT are results -->
