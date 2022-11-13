@@ -1,7 +1,7 @@
 <template>
   <!-- Heading -->
-  <div class="text-center font-sans text-6xl font-semibold
-   text-primary p-10"><a href="/">Datoun katalog</a></div>
+  <div class="text-center font-sans font-semibold text-primary text-4xl p-6
+  md:text-6xl md:p-10"><a href="/">Datoun katalog</a></div>
   <ais-instant-search :search-client="searchClient" index-name="firmy">
 
   <!-- Search box -->
