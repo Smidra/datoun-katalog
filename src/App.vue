@@ -1,47 +1,48 @@
 <template>
+  <!-- Heading -->
   <div class="text-center font-sans text-6xl font-semibold
-   text-sky-500 p-10">
-    Datoun katalog
-  </div>
-
+   text-primary p-10"><a href="/">Datoun katalog</a></div>
   <ais-instant-search :search-client="searchClient" index-name="firmy">
 
-    <!-- <h2>Kategorie</h2>
-  <ais-menu attribute="vyrobny.kategorie" /> -->
+  <!-- Search box -->
+  <ais-search-box class="md:w-3/4 lg:w-1/2 mx-auto p-2" :class-names="{
+    'ais-SearchBox-input': 'p-6 w-full rounded-lg border-2 border-primary hover:shadow-xl focus:font-bold',
+    'ais-SearchBox-submitIcon': 'hidden',
+    'ais-SearchBox-resetIcon': 'hidden',
+  }" type="text" name="search" placeholder="Hlodej šmudlo..." />
 
-    <!-- class="w-10 mx-20 my-4 p-4 rounded-lg border-2 border-indigo-500 hover:shadow-xl" -->
+  <!-- Vertical spacing -->
+  <div class="p-3"></div>
 
-    <ais-search-box class="md:w-3/4 lg:w-1/2 mx-auto p-2" :class-names="{
-      'ais-SearchBox-input': 'p-6 w-full rounded-lg border-2 border-indigo-500 hover:shadow-xl',
-      'ais-SearchBox-submitIcon': 'hidden',
-      'ais-SearchBox-resetIcon': 'hidden',
-    }" type="text" name="search" placeholder="Hlodej šmudlo..." />
+  <!-- Menu is left and results are right -->
+  <div class="flex flex-row mx-auto w-full md:w-3/4">
 
-    <div class="p-4"></div>
-    <!-- <div
-      class="md:w-3/4 lg:w-1/2 mx-auto p-2 grid w-11/12 p-6 mx-auto grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 "> -->
-    <div class="flex flex-row w-3/4 mx-auto">
-      
-      <div class="basis-1/4">
-        <ais-menu class="menu bg-base-100 w-56 p-2 rounded-box" attribute="vyrobny.kategorie" />
-      </div>
-
-      <ais-hits class="basis-3/4">
-
-        <template v-slot:item="{ item }">
-          <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box p-1">
-            <div class="collapse-title text-xl font-medium">
-              {{ item.jmeno_firmy }} / {{ item.vyrobny[0].lokalita }}
-            </div>
-            <div class="collapse-content"> 
-              <p>{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
-            </div>
-          </div>
-        </template>
-      </ais-hits>
-
+    <!-- LEFT is menu -->
+    <div class="w-0 invisible md:visible md:w-1/4">
+      <!-- <ais-menu class="hidden menu bg-base-100 w-56 p-2 rounded-box text-primary" attribute="vyrobny.kategorie" /> -->
+      <ais-menu class="menu bg-base-100 rounded-box text-primary" attribute="vyrobny.kategorie" />
     </div>
 
+    <!-- RIGHT are results -->
+    <ais-hits class="px-2 md:p-0 md:w-3/4"><template v-slot:item="{ item }">
+      <!-- The collapse itself -->
+      <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 hover:text-accent">
+    
+        <!-- Name of the collapse -->
+        <input type="checkbox" />
+        <div class="collapse-title text-xl font-medium">
+          <a class="font-bold text-secondary">{{ item.jmeno_firmy }}
+          </a> <a class="italic">{{ item.vyrobny[0].lokalita }}</a>
+        </div>
+        <!-- Inside the collapse -->
+        <div class="collapse-content">
+          <p class="text-neutral">{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
+        </div>
+
+      </div>
+    </template></ais-hits>
+
+  </div>
   </ais-instant-search>
 </template>
 
