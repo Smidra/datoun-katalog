@@ -20,7 +20,7 @@
     <!-- LEFT is menu -->
     <div class="w-0 invisible md:visible md:w-1/4">
       <!-- <ais-menu class="hidden menu bg-base-100 w-56 p-2 rounded-box text-primary" attribute="vyrobny.kategorie" /> -->
-      <ais-menu class="menu bg-base-100 rounded-box text-primary" attribute="vyrobny.kategorie" />
+      <ais-menu class="dark:text-base-content menu bg-base-100 rounded-box text-primary" attribute="vyrobny.kategorie" />
     </div>
 
     <!-- RIGHT are results -->
@@ -36,7 +36,7 @@
         </div>
         <!-- Inside the collapse -->
         <div class="collapse-content">
-          <p class="text-neutral">{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
+          <p class="text-base-content">{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
         </div>
 
       </div>
