@@ -19,6 +19,7 @@
 
     <!-- LEFT is menu -->
     <div class="w-0 invisible md:visible md:w-1/4">
+    <h2 class="text-accent font-bold text-xl">Kategorie</h2>
       <ais-hierarchical-menu class="dark:text-base-content menu text-primary"
       :attributes="['vyrobny.kategorie']" show-more>
       <template v-slot:showMoreLabel="{ isShowingMore }">
@@ -29,6 +30,7 @@
 
     <!-- RIGHT are results -->
     <ais-hits class="px-2 md:p-0 md:w-3/4"><template v-slot:item="{ item }">
+
       <!-- The collapse itself -->
       <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 hover:text-accent">
     
@@ -47,6 +49,10 @@
     </template></ais-hits>
 
   </div>
+  <div class="flex flex-col items-center md:invisible">
+    <button tabindex="1" class="z-10 btn btn-accent fixed bottom-10 btn-circle px-20">Kategorie</button>
+  </div>
+
   </ais-instant-search>
 </template>
 
