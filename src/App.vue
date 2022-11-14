@@ -1,3 +1,8 @@
+<script setup>
+import MenuComponent from "./components/Menu.vue"
+import ResultsComponent from "./components/Results.vue"
+</script>
+
 <template>
   <!-- Heading -->
   <div class="text-center font-sans font-semibold text-primary text-4xl p-6
@@ -16,39 +21,13 @@
 
   <!-- Menu is left and results are right -->
   <div class="flex flex-row mx-auto w-full md:w-3/4">
-
     <!-- LEFT is menu -->
-    <div class="w-0 invisible md:visible md:w-1/4">
-    <h2 class="text-accent font-bold text-xl">Kategorie</h2>
-      <ais-hierarchical-menu class="dark:text-base-content menu text-primary"
-      :attributes="['vyrobny.kategorie']" show-more>
-      <template v-slot:showMoreLabel="{ isShowingMore }">
-        {{ isShowingMore ? 'Méně kategorií' : 'Další kategorie' }}
-      </template>
-      </ais-hierarchical-menu>
-    </div>
-
+    <div class="w-0 invisible md:visible md:w-1/4"><MenuComponent /></div>
     <!-- RIGHT are results -->
-    <ais-hits class="px-2 md:p-0 md:w-3/4"><template v-slot:item="{ item }">
-
-      <!-- The collapse itself -->
-      <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 hover:text-accent">
-    
-        <!-- Name of the collapse -->
-        <input type="checkbox" />
-        <div class="collapse-title text-xl font-medium">
-          <a class="font-bold text-secondary">{{ item.jmeno_firmy }}
-          </a> <a class="italic">{{ item.vyrobny[0].lokalita }}</a>
-        </div>
-        <!-- Inside the collapse -->
-        <div class="collapse-content">
-          <p class="text-base-content">{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
-        </div>
-
-      </div>
-    </template></ais-hits>
-
+    <div class="px-2 md:p-0 md:w-3/4"><ResultsComponent /></div>
   </div>
+
+  <!-- Menu becomes a button on mobile screens -->
   <div class="flex flex-col items-center md:invisible">
     <button tabindex="1" class="z-10 btn btn-accent fixed bottom-10 btn-circle px-20">Kategorie</button>
   </div>
