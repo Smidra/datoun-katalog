@@ -1,7 +1,7 @@
 <template>
     <ais-hits><template v-slot:item="{ item }">
             <!-- The collapse itself -->
-            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 hover:text-accent">
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 md:hover:text-accent">
 
                 <!-- Name of the collapse -->
                 <input type="checkbox" />

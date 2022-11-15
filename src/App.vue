@@ -16,7 +16,7 @@ import SearchBoxComponent from "./components/SearchBoxComponent.vue"
   <!-- Vertical spacing -->
   <div class="p-3"></div>
 
-  <!-- Menu is left and results are right -->
+  <!-- NORMAL Menu is left and results are right -->
   <div class="flex flex-row mx-auto w-full md:w-3/4">
     <!-- LEFT is menu -->
     <div class="w-0 invisible md:visible md:w-1/4"><MenuComponent /></div>
@@ -24,9 +24,7 @@ import SearchBoxComponent from "./components/SearchBoxComponent.vue"
     <div class="px-2 md:p-0 md:w-3/4"><ResultsComponent /></div>
   </div>
 
-  <!-- <button tabindex="1" class="z-10 btn btn-accent fixed bottom-10 btn-circle px-20">Kategorie</button> -->
-
-  <!-- Menu becomes a button on mobile screens -->
+  <!-- MOBILE Menu becomes a button on mobile screens -->
   <div class="z-20 dropdown dropdown-top flex justify-center">
     <!-- Button. Click to close copied form https://github.com/saadeghi/daisyui/issues/157 -->
     <label tabindex="0" class="btn btn-accent btn-circle px-20 fixed bottom-2 md:invisible" onclick="this.parentElement.classList.toggle('dropdown-open');document.activeElement.blur()" >Kategorie</label>
