@@ -7,7 +7,7 @@
                 <input type="checkbox" />
                 <div class="collapse-title text-xl font-medium">
                     <a class="font-bold text-secondary">{{ item.jmeno_firmy }}
-                    </a> <a class="italic">{{ item.vyrobny[0].lokalita }}</a>
+                    </a> <a class="italic">{{ item.vyrobny[0].lokalita.hezkyNazev }}</a>
                 </div>
                 <!-- Inside the collapse -->
                 <div class="collapse-content">
