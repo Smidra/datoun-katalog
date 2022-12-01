@@ -8,7 +8,7 @@ import Functional from "./Functional.vue"
             <div class="w-full">
                 <!-- Collapse header with basic info -->
                 <div class="w-full flex flex-row justify-between">
-                    <n-h2>{{ item.jmeno_firmy }}, {{ item.vyrobny[0].lokalita.hezkyNazev }}</n-h2>
+                    <n-h2>{{ item.jmeno_firmy }}, {{ item.vyrobny[0].lokalita.hezkyNazev }} </n-h2>
                     <a :href="item.eshop" target="_blank">
                         <n-button size="small" href="googl.com" target="_blank">e-shop</n-button>
                     </a>
@@ -16,13 +16,14 @@ import Functional from "./Functional.vue"
                 <!-- After clicking "více" -->
                 <n-collapse>
                     <n-collapse-item title="Více" name="1">
+                        
                         <n-p>{{ item.popisek_firmy }}</n-p>
+
+                        <Functional :functional="item.funguje" />
 
                         <n-alert type="warning" :show-icon="false">
                             {{ item.poznamky_k_vyrobe }}
                         </n-alert>
-                        <br>
-                        <Functional :functional="item.funguje" />
                     </n-collapse-item>
                 </n-collapse>
             </div>
