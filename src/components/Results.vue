@@ -1,19 +1,19 @@
 <script setup>
+import Functional from "./Functional.vue"
 </script>
 
 <template>
-
     <ais-hits>
         <template v-slot:item="{ item }">
             <div class="w-full">
-
+                <!-- Collapse header with basic info -->
                 <div class="w-full flex flex-row justify-between">
                     <n-h2>{{ item.jmeno_firmy }}, {{ item.vyrobny[0].lokalita.hezkyNazev }}</n-h2>
                     <a :href="item.eshop" target="_blank">
                         <n-button size="small" href="googl.com" target="_blank">e-shop</n-button>
                     </a>
                 </div>
-
+                <!-- After clicking "více" -->
                 <n-collapse>
                     <n-collapse-item title="Více" name="1">
                         <n-p>{{ item.popisek_firmy }}</n-p>
@@ -21,11 +21,8 @@
                         <n-alert type="warning" :show-icon="false">
                             {{ item.poznamky_k_vyrobe }}
                         </n-alert>
-                        
-                        <n-icon-wrapper :size="24" :border-radius="10">
-                            <n-icon :size="18" :component="Checkmark16" />
-                        </n-icon-wrapper>
-
+                        <br>
+                        <Functional :functional="item.funguje" />
                     </n-collapse-item>
                 </n-collapse>
             </div>

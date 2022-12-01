@@ -4,20 +4,20 @@ import ResultsComponent from "./components/Results.vue"
 import SearchBoxComponent from "./components/SearchBoxComponent.vue"
 import algoliasearch from "algoliasearch"
 import 'instantsearch.css/themes/satellite-min.css';
+import Statistics from "./components/statistics.vue"
 
 const searchClient = algoliasearch('S27OT8U78J', '6c71ae31ec984a2185234a501482d57a')
 </script>
 
 <template>
   <!-- Heading -->
-  <n-h1 class="text-center text-4xl p-6 md:text-6xl md:p-10">
-    <a href="/">Datoun katalog</a>
+  <n-h1 class="text-center text-5xl p-6 md:text-6xl md:pt-10">
+    <a href="/">Datoun</a>
   </n-h1>
-  <ais-instant-search :search-client="searchClient" index-name="firmy">
 
+  <ais-instant-search :search-client="searchClient" index-name="firmy">
     <!-- Search box -->
     <SearchBoxComponent />
-
     <!-- Vertical spacing -->
     <div class="p-3"></div>
 
@@ -26,6 +26,7 @@ const searchClient = algoliasearch('S27OT8U78J', '6c71ae31ec984a2185234a501482d5
       <!-- LEFT is menu -->
       <div class="w-0 invisible md:visible md:w-1/4">
         <MenuComponent />
+        <!-- <Statistics /> -->
       </div>
       <!-- RIGHT are results -->
       <div class="w-full px-2 md:p-0 md:w-3/4">
