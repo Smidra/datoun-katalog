@@ -8,7 +8,12 @@ import Functional from "./Functional.vue"
             <div class="w-full">
                 <!-- Collapse header with basic info -->
                 <div class="w-full flex flex-row justify-between">
-                    <n-h2>{{ item.jmeno_firmy }}, {{ item.vyrobny[0].lokalita.hezkyNazev }} </n-h2>
+                    <n-h2 class="flex flex-row items-center">
+                        <img width="40" :src="item.logo" />
+                        <a class="mx-3">
+                            {{ item.jmeno_firmy }}, {{ item.vyrobny[0].lokalita.hezkyNazev }}
+                        </a>
+                    </n-h2>
                     <a :href="item.eshop" target="_blank">
                         <n-button size="small" href="googl.com" target="_blank">e-shop</n-button>
                     </a>
@@ -16,11 +21,8 @@ import Functional from "./Functional.vue"
                 <!-- After clicking "více" -->
                 <n-collapse>
                     <n-collapse-item title="Více" name="1">
-                        
                         <n-p>{{ item.popisek_firmy }}</n-p>
-
                         <Functional :functional="item.funguje" />
-
                         <n-alert type="warning" :show-icon="false">
                             {{ item.poznamky_k_vyrobe }}
                         </n-alert>
@@ -29,13 +31,4 @@ import Functional from "./Functional.vue"
             </div>
         </template>
     </ais-hits>
-
-    <!--     <ais-hits>
-        <template v-slot:item="{ item }">
-            <a class="">{{ item.jmeno_firmy }}
-            </a> <a class="italic">{{ item.vyrobny[0].lokalita.hezkyNazev }}</a>
-            <p class="">{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
-        </template>
-    </ais-hits>
- -->
 </template>

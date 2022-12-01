@@ -1,11 +1,11 @@
 + Přidat věci do zobrazených výsledů
-Logo
+	Logo
 	Jmeno-firmy
 Aliasy
 	Popisek firmy
 	Poznámky k výrobě
 	eshop
-Funguje
+	Funguje
 
 + Hezčí vyhledávací pole
 + Hezčí nadpis
