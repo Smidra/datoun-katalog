@@ -1,20 +1,43 @@
+<script setup>
+</script>
+
 <template>
-    <ais-hits><template v-slot:item="{ item }">
-            <!-- The collapse itself -->
-            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 md:hover:text-accent">
 
-                <!-- Name of the collapse -->
-                <input type="checkbox" />
-                <div class="collapse-title text-xl font-medium">
-                    <a class="font-bold text-secondary">{{ item.jmeno_firmy }}
-                    </a> <a class="italic">{{ item.vyrobny[0].lokalita.hezkyNazev }}</a>
-                </div>
-                <!-- Inside the collapse -->
-                <div class="collapse-content">
-                    <p class="text-base-content">{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
+    <ais-hits>
+        <template v-slot:item="{ item }">
+            <div class="w-full">
+
+                <div class="w-full flex flex-row justify-between">
+                    <n-h2>{{ item.jmeno_firmy }}, {{ item.vyrobny[0].lokalita.hezkyNazev }}</n-h2>
+                    <a :href="item.eshop" target="_blank">
+                        <n-button size="small" href="googl.com" target="_blank">e-shop</n-button>
+                    </a>
                 </div>
 
+                <n-collapse>
+                    <n-collapse-item title="Více" name="1">
+                        <n-p>{{ item.popisek_firmy }}</n-p>
+
+                        <n-alert type="warning" :show-icon="false">
+                            {{ item.poznamky_k_vyrobe }}
+                        </n-alert>
+                        
+                        <n-icon-wrapper :size="24" :border-radius="10">
+                            <n-icon :size="18" :component="Checkmark16" />
+                        </n-icon-wrapper>
+
+                    </n-collapse-item>
+                </n-collapse>
             </div>
-        </template></ais-hits>
+        </template>
+    </ais-hits>
 
+    <!--     <ais-hits>
+        <template v-slot:item="{ item }">
+            <a class="">{{ item.jmeno_firmy }}
+            </a> <a class="italic">{{ item.vyrobny[0].lokalita.hezkyNazev }}</a>
+            <p class="">{{ item.popisek_firmy }}<a :href=item.eshop>{{ item.eshop }}</a></p>
+        </template>
+    </ais-hits>
+ -->
 </template>

@@ -3,14 +3,16 @@ import MenuComponent from "./components/Menu.vue"
 import ResultsComponent from "./components/Results.vue"
 import SearchBoxComponent from "./components/SearchBoxComponent.vue"
 import algoliasearch from "algoliasearch"
+import 'instantsearch.css/themes/satellite-min.css';
 
-const searchClient = algoliasearch('S27OT8U78J','6c71ae31ec984a2185234a501482d57a')
+const searchClient = algoliasearch('S27OT8U78J', '6c71ae31ec984a2185234a501482d57a')
 </script>
 
 <template>
   <!-- Heading -->
-  <div class="text-center font-sans font-semibold text-primary text-4xl p-6
-  md:text-6xl md:p-10"><a href="/">Datoun katalog</a></div>
+  <n-h1 class="text-center text-4xl p-6 md:text-6xl md:p-10">
+    <a href="/">Datoun katalog</a>
+  </n-h1>
   <ais-instant-search :search-client="searchClient" index-name="firmy">
 
     <!-- Search box -->
@@ -26,23 +28,23 @@ const searchClient = algoliasearch('S27OT8U78J','6c71ae31ec984a2185234a501482d57
         <MenuComponent />
       </div>
       <!-- RIGHT are results -->
-      <div class="px-2 md:p-0 md:w-3/4">
+      <div class="w-full px-2 md:p-0 md:w-3/4">
         <ResultsComponent />
       </div>
     </div>
 
     <!-- MOBILE Menu becomes a button on mobile screens -->
-    <div class="z-20 dropdown dropdown-top flex justify-center">
-      <!-- Button. Click to close copied form https://github.com/saadeghi/daisyui/issues/157 -->
-      <label tabindex="0" class="btn btn-accent btn-circle px-20 fixed bottom-2 md:invisible"
-        onclick="this.parentElement.classList.toggle('dropdown-open');document.activeElement.blur()">Kategorie</label>
-      <!-- Opened menu -->
-      <div class="fixed bottom-16 flex justify-center w-full">
+    <!-- <div class="z-20 dropdown dropdown-top flex justify-center"> -->
+    <!-- Button. Click to close copied form https://github.com/saadeghi/daisyui/issues/157 -->
+    <!-- <label tabindex="0" class="btn btn-accent btn-circle px-20 fixed bottom-2 md:invisible"
+        onclick="this.parentElement.classList.toggle('dropdown-open');document.activeElement.blur()">Kategorie</label> -->
+    <!-- Opened menu -->
+    <!-- <div class="fixed bottom-16 flex justify-center w-full">
         <ul tabindex="0" class="dropdown-content bg-base-200 rounded-box p-6 w-full">
           <MenuComponent />
         </ul>
       </div>
-    </div>
+    </div> -->
 
   </ais-instant-search>
 </template>

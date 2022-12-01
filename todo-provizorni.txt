@@ -1,0 +1,19 @@
++ Přidat věci do zobrazených výsledů
+Logo
+	Jmeno-firmy
+Aliasy
+	Popisek firmy
+	Poznámky k výrobě
+	eshop
+Funguje
+
++ Hezčí vyhledávací pole
++ Hezčí nadpis
++ Statistiky datouna pod Kategoriemi.
+
+
+Zobrazení výroben je až později TODO
+- Kategorie - puntikovej blbinec, co už mám
+- Lokality
+Filtr kategorií v mobilním zobrazení je na později TODO
+Pixel perfect okraje výsledků
