@@ -1,4 +1,4 @@
-# DATOUN admin
+# DATOUN Katalog
 "DAtabáze TOváren U Nás" is an opensource database of Czech factories. It's goal is to provide simple search interface for those searching for products made in Czechia.
 
 All contributions welcome ❤️
@@ -19,6 +19,9 @@ npm install
 npm run dev
 ```
 CD pipeline build every version in main and pushes it to production.
+
+## UI kit
+For UI components we try to use [NaiveUI](https://www.naiveui.com) where possible. Datoun strives to be a serious website, so the design should not be too playfull and over the head filled with animations. Naive UI is a nice alternative to the sterile IBM design system, Google is too fun, and Fluent does not have a library for Vue3.
 
 ## Database
 * Algolia ID
