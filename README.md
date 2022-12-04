@@ -1,37 +1,54 @@
-# Katalog českých výrobků
+# DATOUN admin
+"DAtabáze TOváren U Nás" is an opensource database of Czech factories. It's goal is to provide simple search interface for those searching for products made in Czechia.
 
-Build KATALOGU na testování (tento repozitář):
-* https://datoun.cz
-* https://github.com/Smidra/datoun-katalog (REPO)
+All contributions welcome ❤️
 
-Live build ADMIN repozitáře pro vkládání:
-* https://admin.datoun.cz
-* https://github.com/Smidra/datoun-admin (REPO)
+## Tech stack
+The whole project consists of 3 parts, all licensed under the MIT license.
 
+- Datoun admin [admin.datoun.cz](https://admin.datoun.cz) + [REPO](https://github.com/Smidra/datoun-admin)
+  - Vue3 app for inserting new companies into the database
+- Datoun katalog [datoun.cz](https://datoun.cz) + [REPO](https://github.com/Smidra/datoun-katalog)
+  - Vue3 + instantsearch app for browsing the database.
+- Algolia backend
 
-## TODO
-* [ ] Udělat to celé od píky hezky.
+## Installation
+```
+git clone git@github.com:Smidra/datoun-admin.git
+npm install
+npm run dev
+```
+CD pipeline build every version in main and pushes it to production.
 
-
-## Project setup
-**Všechno smazat a vytvořit něco nového, lepšího, funkčního.** Především pak nová věc musí umět:
-* Asi je vhodné pro tvorbu použít meilisearch instantsearch
-* Vyhledávat plaintextem napříč poli
-* Mít menu, (které má i možnost submenu). V menu jsou položky (jako složky) a v těch jsou rozřazené jako listy kategorie. Kategorie (stringy které mají přiřazené továrny) jsou vždy list ve struktuře menu.
-  * Při kliknutí na list menu se vyhledají výsledky filtru přes tuto kategorii. (Při kliknutí na "Trička" se vyhledají všechny firmy, které mají alespoň v jedné své továrně kategorii "trička")
-  * Při kliknutí na ne-list ve struktuře menu se vyhledají výsledky filtrované kategoriemi všech listů pod tímto ne-listem ve funkci OR. (Při kliknutí na "oblečení" se vyhledá filtr tento >> trička OR kalhoty OR sukně ...)
-
-## Databáze
-* Endpoint
-  * https://wiki.smid.io
-* Bearer token pro vyhledávání
-  * Authorization:Bearer 66cad08d67ad93aeb7549e78fe084c755946be1db4a4144c7a6de9ef32eb405f
-* Index (jméno schéma)
+## Database
+* Algolia ID
+  * S27OT8U78J
+* Bearer token
+  * Authorization:Bearer 39e5cf3041647ce2f68c09b8e477eb8c
+* Index
   * firmy
-* Token může v databázi všechno. Zatím. Pro testování doporučuji Postman + Meilisearch https://docs.meilisearch.com/learn/cookbooks/postman_collection.html#postman-collection-for-meilisearch
-* Vkládání věcí do databáze lze prohlédnout ve velice alfa stádiu na https://smidra.github.io/vyrobky-admin/ <-- To jenom abyste nemuseli vždy startovat postmana. 
 
-## Současná struktura databáze
+## Mockup JSON
+| Key           | Validation           | Description  |
+| :------------- |:-------------| :-----|
+| id |              |  Seconds since Epoch  |
+| jmeno_firmy   |   |  Name of the company  |
+| aliasy  |         |  [Array of sitrings] Brands from the company, aliases...  |
+| popisek_firmy  |  |  Short description filled with keywords. Preferably from the company website.  |
+| poznamky_k_vyrobe  |   |  Do they make everything in Czechia? Are there exceptions?  |
+| eshop  |          |  URL where to buy products from the company  |
+| logo  |           |  URL of a logo of the company  |
+| funguje  |        |  [Boolean] Is the company still operating?  |
+| vyrobny  |        |  [Array of VYROBNY objects] One for every factory the company has |
+
+### VYROBNY object
+| Key        | Validation           | Description  |
+| :------------- |:-------------| :-----|
+| lokalita  |     |  [OBEC object from obce.json] A town where the factory is  |
+| kategorie0  |   |  [ARRAY of strings] Higest level categories of the products made in this factory |
+| kategorie1  |   |  [ARRAY of strings] Categories of the products made in this factory 1 level deep |
+| kategorie2  |   |  [ARRAY of strings] Categories of the products made in this factory 2 level deep |
+
 ```
 {
     "id": 1,
@@ -59,11 +76,11 @@ Live build ADMIN repozitáře pro vkládání:
     "funguje": true,
     "vyrobny": [
         {
-            "lokalita": "Velké Meziříčí",
-            "kategorie.0": [
+            "lokalita": {...obec z obce.json...}, 
+            "kategorie0": [
                 "Drogerie"
             ],
-            "kategorie.1": [
+            "kategorie1": [
                 "Drogerie > Zubní pasty",
                 "Drogerie > Masážní gely",
                 "Drogerie > Holení"
