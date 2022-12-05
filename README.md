@@ -1,7 +1,8 @@
 # DATOUN Katalog
 "DAtabáze TOváren U Nás" is an opensource database of Czech factories. It's goal is to provide simple search interface for those searching for products made in Czechia.
 
-All contributions welcome ❤️
+Can't code? [Help fill Datoun with relevant data](https://drive.google.com/drive/folders/1bB6mNt8FGW0a8gbauo0KqqMfvNPF1fI0?usp=share_link). All contributions welcome ❤️
+
 
 ## Tech stack
 The whole project consists of 3 parts, all licensed under the MIT license.
