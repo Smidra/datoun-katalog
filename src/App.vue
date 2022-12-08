@@ -23,14 +23,14 @@ const searchClient = algoliasearch('S27OT8U78J', '6c71ae31ec984a2185234a501482d5
       <div class="p-3"></div>
 
       <!-- NORMAL Menu is left and results are right -->
-      <div class="flex flex-row mx-auto w-full md:w-3/4">
+      <div class="flex flex-row mx-auto w-full md:w-full lg:w-3/4">
         <!-- LEFT is menu -->
-        <div class="w-0 invisible md:visible md:w-1/4">
+        <div class="w-0 invisible md:visible md:min-w-fit md:w-3/12">
           <MenuComponent />
           <!-- <Statistics /> -->
         </div>
         <!-- RIGHT are results -->
-        <div class="mb-52 w-full px-2 md:p-0 md:w-3/4">
+        <div class="mb-52 w-full px-2 md:p-0 md:w-9/12">
           <ResultsComponent />
         </div>
       </div>
