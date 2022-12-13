@@ -18,7 +18,7 @@ import Functional from "./Functional.vue"
                                         {{ item.jmeno_firmy }}
                                     </a>
                                     <a class="text-gray-400">
-                                        , {{ item.vyrobny[0].lokalita.hezkyNazev }}
+                                        ,&nbsp;{{ item.vyrobny[0].lokalita.hezkyNazev }} <!-- Unbreakable space -->
                                     </a>
                                 </n-h2>
                                 <a :href="item.eshop" target="_blank">
