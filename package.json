@@ -1,29 +1,49 @@
 {
-  "name": "my-project",
+  "name": "datoun-gpt",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@vicons/ionicons5": "^0.12.0",
-    "@vicons/material": "^0.12.0",
-    "algoliasearch": "^4.14.2",
-    "daisyui": "^2.39.1",
-    "instantsearch.css": "^7.4.5",
-    "vue": "^3.2.41",
-    "vue-instantsearch": "^4.6.0"
+    "@carbon/icons-vue": "^10.79.1",
+    "@carbon/vue": "^3.0.11",
+    "algoliasearch": "^4.22.0",
+    "axios": "^1.6.2",
+    "carbon-components": "^10.58.12",
+    "core-js": "^3.8.3",
+    "vue": "^3.2.13",
+    "vue-instantsearch": "^4.13.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.2.0",
-    "autoprefixer": "^10.4.13",
-    "naive-ui": "^2.34.2",
-    "postcss": "^8.4.19",
-    "tailwindcss": "^3.2.3",
-    "vfonts": "^0.0.3",
-    "vite": "^3.2.3"
-  }
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }

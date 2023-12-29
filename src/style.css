@@ -1,3 +1,148 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+#app {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+}
+
+.bx--side-nav {
+    border-right: 1px solid #d9d9d9;
+    width: 16rem !important;
+}
+
+.main-content {
+    grid-column: 2;
+    padding: 1rem;
+    margin-left: 16rem;
+}
+
+.bx--side-nav__header-navigation {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+.cv-header-name {
+    width: 16rem;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 16rem 1fr;
+}
+
+.tile-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1rem;
+    margin-left: 17rem;
+    margin-right: 1rem;
+}
+
+.tile-content {
+    text-align: left;
+}
+
+.factory-icon {
+    font-size: 1em;
+    transform: scale(1.3);
+}
+
+.factory-icon-modal {
+    font-size: 1em;
+    transform: scale(1.6);
+}
+
+.icon-unknown {
+    fill: #8d8d8d;
+}
+
+.icon-error {
+    fill: #da1e28;
+}
+
+.icon-caution {
+    fill: #ff832b;
+}
+
+
+.icon-in-progress {
+    fill: #0043ce;
+}
+
+.icon-success {
+    fill: #0043ce;
+}
+
+.tile-padding {
+    padding: 1rem;
+}
+
+
+@media (max-width: 768px) {
+    .bx--side-nav {
+        display: none;
+    }
+
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tile-container {
+        margin-left: 1rem;
+    }
+
+    .bx--side-nav {
+        width: 100%;
+        position: static;
+    }
+}
+
+.custom-divider {
+    border: none;
+    border-top: 1px solid #d9d9d9;
+    margin: 1em 0;
+}
+
+.category-title {
+    padding-top: 0rem;
+    padding-left: 1rem;
+    text-align: left;
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+}
+
+.button-content>*:first-child {
+    margin-right: 0.5em;
+}
+
+.modal-content {
+    width: 97%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    /* ensure the content fills the entire width of the modal */
+}
+
+.list-container {
+    padding: 0 1rem;
+}
+
+.modal-title {
+    padding-right: 3rem;
+    padding-left: 1rem;
+    padding-top: 0rem;
+}
+
+.modal-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.subtitle {
+    padding-left: 1rem;
+}

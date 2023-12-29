@@ -1,53 +1,76 @@
-<script setup>
-import MenuComponent from "./components/Menu.vue"
-import ResultsComponent from "./components/Results.vue"
-import SearchBoxComponent from "./components/SearchBoxComponent.vue"
-import algoliasearch from "algoliasearch"
-import 'instantsearch.css/themes/satellite-min.css';
-import Statistics from "./components/statistics.vue"
-
-const searchClient = algoliasearch('S27OT8U78J', '6c71ae31ec984a2185234a501482d57a')
-</script>
-
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <!-- Heading -->
-    <n-h1 class="text-center text-5xl p-6 md:text-6xl md:pt-10">
-      <a href="/">Datoun</a>
-    </n-h1>
+    <div id="app">
+        <ais-instant-search :search-client="searchClient" index-name="firmy">
+            <ais-configure :query="searchQuery" />
+            <!-- Header -->
+            <cv-header aria-label="Carbon header">
+                <cv-header-menu-button class="hamburger-menu" aria-label="Header menu" aria-controls="side-nav"
+                    :active="expandedSideNav" @click="expandedSideNav = !expandedSideNav" />
+                <cv-skip-to-content href="#main-content">Skip to content</cv-skip-to-content>
+                <cv-header-name href="#" prefix="Tohle je" class="header-name" @click="reloadPage">Datoun</cv-header-name>
 
-    <ais-instant-search :search-client="searchClient" index-name="firmy">
-      <!-- Search box -->
-      <SearchBoxComponent />
-      <!-- Vertical spacing -->
-      <div class="p-3"></div>
+                <cv-search v-model="searchQuery" placeholder="Search"></cv-search>
 
-      <!-- NORMAL Menu is left and results are right -->
-      <div class="flex flex-row mx-auto w-full md:w-full lg:w-3/4">
-        <!-- LEFT is menu -->
-        <div class="w-0 invisible md:visible md:min-w-fit md:w-3/12">
-          <MenuComponent />
-          <!-- <Statistics /> -->
-        </div>
-        <!-- RIGHT are results -->
-        <div class="mb-52 w-full px-2 md:p-0 md:w-9/12">
-          <ResultsComponent />
-        </div>
-      </div>
+                <!-- Side Navigation -->
+                <template v-slot:left-panels>
+                    <cv-side-nav id="side-nav" :rail="true" :fixed="useFixed" class="side-nav" :expanded="expandedSideNav">
 
-      <!-- MOBILE Menu becomes a button on mobile screens -->
-      <!-- <div class="z-20 dropdown dropdown-top flex justify-center"> -->
-      <!-- Button. Click to close copied form https://github.com/saadeghi/daisyui/issues/157 -->
-      <!-- <label tabindex="0" class="btn btn-accent btn-circle px-20 fixed bottom-2 md:invisible"
-        onclick="this.parentElement.classList.toggle('dropdown-open');document.activeElement.blur()">Kategorie</label> -->
-      <!-- Opened menu -->
-      <!-- <div class="fixed bottom-16 flex justify-center w-full">
-        <ul tabindex="0" class="dropdown-content bg-base-200 rounded-box p-6 w-full">
-          <MenuComponent />
-        </ul>
-      </div>
-    </div> -->
+                        <ais-hierarchical-menu :show-parent-level="true"
+                            :attributes="['kategorie0', 'kategorie1', 'kategorie2']">
+                            <template v-slot="{ items, refine, canRefine }">
+                                <HierarchicalMenu :items="items" :refine="refine" :canRefine="canRefine">
+                                </HierarchicalMenu>
+                            </template>
+                        </ais-hierarchical-menu>
 
-    </ais-instant-search>
-  </div>
+                        <hr class="custom-divider" />
+                        <cv-button kind="ghost" class="grey-text" @click="showModal = true">
+                            Přidat novou firmu<add-icon />
+                        </cv-button>
+
+                        <EditModal v-model:visible="showModal" :newCompany="true" />
+
+                    </cv-side-nav>
+                </template>
+
+            </cv-header>
+
+            <!-- Main Content -->
+            <main>
+                <ais-hits>
+                    <template v-slot="{ items }">
+                        <div class="tile-container">
+                            <ItemTile v-for="item in items" :key="item.objectID" :item="item" />
+                        </div>
+                    </template>
+                </ais-hits>
+            </main>
+
+        </ais-instant-search>
+    </div>
 </template>
+  
+<script src="./script.js"></script>
+
+<style src="./style.css"></style>
+<style scoped>
+:deep(.hamburger-menu) {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    :deep(.hamburger-menu) {
+        display: block;
+    }
+}
+
+.header-name {
+    font-size: 1.5rem;
+    /* Adjust as needed */
+}
+
+.grey-text {
+    /* color: #5A6872; */
+    color: #0f62fe;
+}
+</style>
