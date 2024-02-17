@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <ais-instant-search :search-client="searchClient" index-name="firmy">
-            <ais-configure :query="searchQuery" :hitsPerPage="hitsPerPage" :page="page - 1" />
+            <ais-configure :query="searchQuery" />
             <!-- Header -->
             <cv-header aria-label="Carbon header">
                 <cv-header-menu-button class="hamburger-menu" aria-label="Header menu" aria-controls="side-nav"
@@ -27,8 +27,13 @@
                         <cv-button kind="ghost" class="grey-text" @click="showModal = true">
                             Přidat novou firmu<add-icon />
                         </cv-button>
-
                         <EditModal v-model:visible="showModal" />
+
+
+                        <cv-button kind="ghost" class="grey-text" @click="showAbout = true">
+                            O nás
+                        </cv-button>
+                        <AboutModal v-model:visible="showAbout" />
 
                     </cv-side-nav>
                 </template>
@@ -36,39 +41,24 @@
             </cv-header>
 
             <!-- Main Content -->
-            <main id="#main-content">
-                <div class="top-pagination">
-                    <ais-pagination>
-                        <template v-slot="{ nbHits }">
-                            <cv-pagination @change="onPaginationChange" :number-of-items="nbHits" :page="page" :pageSizes="[
-                                12, { 'value': 15, 'selected': true }, 24, 48]" pageSizesLabel="Firem na stránku:">
-                                <template v-slot:range-text="{ scope }">
-                                    <span>{{ scope.start }}-{{ scope.end }} ze {{ scope.items }}</span>
-                                </template>
-                                <template v-slot:of-n-pages="{ scope }">
-                                    <span>ze {{ scope.pages }} stránek</span>
-                                </template>
-                            </cv-pagination>
-                        </template>
-                    </ais-pagination>
-                </div>
+            <main>
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
-                            <ItemTile v-for=" item  in  items " :key="item.objectID" :item="item" />
+                            <ItemTile v-for="item in items" :key="item.objectID" :item="item" />
                         </div>
                     </template>
                 </ais-hits>
             </main>
 
         </ais-instant-search>
+        <AboutModal/>
     </div>
 </template>
   
 <script src="./script.js"></script>
 
-<style src="./style.css">
-</style>
+<style src="./style.css"></style>
 <style scoped>
 :deep(.hamburger-menu) {
     display: none;
