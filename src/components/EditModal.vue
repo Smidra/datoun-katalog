@@ -1,6 +1,5 @@
 <template>
-    <cv-modal @primary-click="sendForm" kind="danger"
-        @modal-shown="focusInputField">
+    <cv-modal @primary-click="sendForm" kind="danger" @modal-shown="focusInputField">
         <template v-slot:label>
             <div class="label-padding">
                 Tvoje IP je {{ ipAddress }}.
@@ -23,6 +22,7 @@
         <!-- Content of the modal -->
         <template v-slot:content>
             <div class="modal-content">
+                <cv-loading v-if="isLoading" :active="true" overlay="true"/>
                 <!-- Carbon design system form to modify data in Algolia -->
                 <cv-form ref="form">
                     <div class="form-container">
@@ -47,7 +47,7 @@
                     <br />
                     <cv-text-area v-model="form.popisek_firmy" label="Stručný popisek firmy" />
                     <br />
-                    <cv-text-input v-model="form.aliasy" @input="handleInput" label="Značky & Aliasy" />
+                    <cv-text-input v-model="form.aliasy" label="Značky & Aliasy" />
 
                     <p v-if="message">{{ message }}</p>
                 </cv-form>
@@ -107,23 +107,13 @@ export default {
     },
     data() {
         return {
-            showModal: false,
             form: {},
             isLoading: false,
             message: '',
             ipAddress: '',
-            tags: [],
-            tagInput: '',
         };
     },
     methods: {
-        handleInput() {
-            console.log('tagInput: ', this.tagInput);
-            if (this.tagInput.endsWith(',')) {
-                this.tags.push(this.tagInput.slice(0, -1));
-                this.tagInput = '';
-            }
-        },
         focusInputField() {
             if (this.$refs['name-input'] && this.$refs['name-input'].$el) {
                 const inputElement = this.$refs['name-input'].$el.querySelector('input');
