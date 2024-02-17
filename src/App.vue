@@ -28,7 +28,7 @@
                             Přidat novou firmu<add-icon />
                         </cv-button>
 
-                        <EditModal v-model:visible="showModal" :newCompany="true" />
+                        <EditModal v-model:visible="showModal" />
 
                     </cv-side-nav>
                 </template>
