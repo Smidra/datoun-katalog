@@ -5,6 +5,7 @@ import HierarchicalMenu from './components/HierarchicalMenu.vue';
 import ItemTile from './components/ItemTile.vue';
 import Add16 from '@carbon/icons-vue/es/add/16';
 import EditModal from './components/EditModal.vue';
+import AboutModal from './components/AboutModal.vue';
 
 export default {
     name: 'App',
@@ -25,6 +26,7 @@ export default {
         AisStateResults,
         'add-icon': Add16,
         EditModal,
+        AboutModal,
     },
     data() {
         return {
@@ -36,6 +38,7 @@ export default {
             searchResults: [],
             searchClient: algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3'),
             showModal: false,
+            showAbout: false,
         };
     },
     mounted() {

@@ -30,6 +30,12 @@
 
                         <EditModal v-model:visible="showModal" />
 
+
+                        <cv-button kind="ghost" class="grey-text" @click="showAbout = true">
+                            O nás
+                        </cv-button>
+                        <AboutModal v-model:visible="showAbout" />
+
                     </cv-side-nav>
                 </template>
 
@@ -67,8 +73,7 @@
   
 <script src="./script.js"></script>
 
-<style src="./style.css">
-</style>
+<style src="./style.css"></style>
 <style scoped>
 :deep(.hamburger-menu) {
     display: none;
