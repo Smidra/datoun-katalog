@@ -1,13 +1,11 @@
 // Get only leaves from array with ">"" notation
 export function getLeaves(kategorieArray) {
     let leaves = [];
-
-    [kategorieArray].forEach(kategorie => {
-        kategorie.forEach(item => {
-            let parts = item.split('>');
-            let leaf = parts[parts.length - 1].trim();
-            leaves.push(leaf);
-        });
+    
+    kategorieArray.forEach(item => {
+        let parts = item.split('>');
+        let leaf = parts[parts.length - 1].trim();
+        leaves.push(leaf);
     });
 
     return leaves;
