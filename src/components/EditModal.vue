@@ -1,6 +1,5 @@
 <template>
-    <cv-modal @primary-click="sendForm" kind="danger" :visible="isOpen" @visible="updateIsOpen"
-        @modal-shown="focusInputField" @hide="handleHide">
+    <cv-modal @primary-click="sendForm" kind="danger" @modal-shown="focusNameInputField">
         <template v-slot:label>
             <div class="label-padding">
                 Tvoje IP je {{ ipAddress }}.
@@ -9,31 +8,13 @@
 
         <template v-slot:title>
             <div class="modal-title-container">
-
-                <!-- Editing -->
-                <div v-if="newCompany == false">
-                    <h2 class="modal-title">
-                        {{ editedItem?.jmeno_firmy }}, {{ editedItem?.vyrobny
-                            &&
-                            editedItem.vyrobny.length > 0
-                            ? editedItem.vyrobny[0].lokalita.hezkyNazev : '' }}
-                        <editing-icon class="editing-icon" />
-                    </h2>
-                    <p class="subtitle bx--tile__subtitle">
-                        S velkou mocí přichází i velká zodpovědnost.
-                    </p>
-                </div>
-
-                <!-- Creating new company -->
-                <div v-else-if="newCompany == true">
-                    <h2 class="modal-title">
-                        Nová firma <editing-icon class="editing-icon" />
-                    </h2>
-                    <p class="subtitle bx--tile__subtitle">
-                        S velkou mocí přichází i velká zodpovědnost.
-                    </p>
-                </div>
-
+                <h2 class="modal-title">
+                    {{ title }}
+                    <editing-icon class="editing-icon" />
+                </h2>
+                <p class="subtitle bx--tile__subtitle">
+                    S velkou mocí přichází i velká zodpovědnost.
+                </p>
             </div>
         </template>
 
@@ -41,6 +22,7 @@
         <!-- Content of the modal -->
         <template v-slot:content>
             <div class="modal-content">
+                <cv-loading v-if="isLoading" :active="true" overlay="true"/>
                 <!-- Carbon design system form to modify data in Algolia -->
                 <cv-form ref="form">
                     <div class="form-container">
@@ -65,8 +47,7 @@
                     <br />
                     <cv-text-area v-model="form.popisek_firmy" label="Stručný popisek firmy" />
                     <br />
-                    <cv-text-input v-model="form.aliasy" @input="handleInput" label="Značky & Aliasy" />
-
+                    <cv-text-input v-model="form.aliasy" label="Značky & Aliasy" />
 
                     <p v-if="message">{{ message }}</p>
                 </cv-form>
@@ -94,7 +75,6 @@ import { CvForm, CvTextInput, CvTextArea } from '@carbon/vue';
 import EditingIcon from '@carbon/icons-vue/es/edit/32';
 import algoliasearch from 'algoliasearch';
 import getIP from '../utils/GetIP.js';
-// import axios from 'axios';
 
 export default {
     components: {
@@ -104,49 +84,33 @@ export default {
         'editing-icon': EditingIcon,
     },
     props: {
-        isOpen: {
-            type: Boolean,
-            default: false
-        },
-        newCompany: {
-            type: Boolean,
-            default: undefined,
-        },
         editedItem: {
             type: Object,
-            default: () => ({}),
+            default: () => null,
+        },
+    },
+    computed: {
+        title() {
+            if (this.editedItem == null) {
+                return 'Nová firma';
+            }
+            let has_vyrobna = this.editedItem.vyrobny && this.editedItem.vyrobny.length > 0
+            if (has_vyrobna) {
+                return `${this.editedItem.jmeno_firmy}, ${this.editedItem.vyrobny[0].lokalita.hezkyNazev}`;
+            }
+            return this.editedItem.jmeno_firmy;
         },
     },
     data() {
         return {
-            showModal: false,
             form: {},
             isLoading: false,
             message: '',
             ipAddress: '',
-            tags: [],
-            tagInput: '',
         };
     },
     methods: {
-        updateIsOpen(newVal) {
-            this.$emit('update:isOpen', newVal);
-            // Focus on the input field when the modal opens
-            if (newVal) {
-                this.focusInputField();
-            }
-        },
-        handleHide() {
-            this.$emit('update:isOpen', false);
-        },
-        handleInput() {
-            console.log('tagInput: ', this.tagInput);
-            if (this.tagInput.endsWith(',')) {
-                this.tags.push(this.tagInput.slice(0, -1));
-                this.tagInput = '';
-            }
-        },
-        focusInputField() {
+        focusNameInputField() {
             if (this.$refs['name-input'] && this.$refs['name-input'].$el) {
                 const inputElement = this.$refs['name-input'].$el.querySelector('input');
                 if (inputElement) {
@@ -154,28 +118,23 @@ export default {
                 }
             }
         },
+        reloadPage() {
+            location.reload();
+        },
         async sendForm() {
-            console.log('sendForm started');
             this.isLoading = true;
             try {
                 // Initialize Algolia client
                 const client = algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3');
                 const index = client.initIndex('firmy');
 
-                // Prepare the object data
-                let objectData = { ...this.form };
-
-                // If new-company is false, use item.objectID as the object ID
-                if (!this.newCompany) {
-                    console.log('newCompany is false');
-                    objectData.objectID = this.editedItem.objectID;
-                }
-
-                // Add or update the object
-                await index.saveObject(objectData, { autoGenerateObjectIDIfNotExist: true });
+                await index.saveObject(this.form, { autoGenerateObjectIDIfNotExist: true });
 
                 this.message = 'Form submitted successfully!';
-                this.$emit('update:isOpen', false); // Close the modal after successful submission
+                // Wait a short amount of time before reloading the page to make sure Algolia has time to update the index.
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Reloading the page is a bit ugly but works for now.
+                this.reloadPage()
             } catch (error) {
                 this.message = 'An error occurred while submitting the form.';
                 console.error(error); // Log the error for debugging
@@ -185,11 +144,12 @@ export default {
         },
     },
     created() {
-        if (!this.newCompany) {
+        if (this.editedItem != null) {
             this.form = { ...this.editedItem };
         }
     },
     async mounted() {
+        this.focusNameInputField();
         this.ipAddress = await getIP();
     },
 };
