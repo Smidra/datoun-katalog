@@ -40,7 +40,15 @@
                         </div>
                     </div>
                     <div>
-                        <cv-combo-box v-for="(category, index) in selectedCategories" :key="category.value" :value="category.value" aria-label='Kategorie' @change='onCategoryChange($event, index)' @filter='onCategoryFilter($event, index)' :options="availableCategoryOptions(index)"/>
+                        <cv-combo-box
+                            v-for="(category, index) in selectedCategories"
+                            :key="category.value" :value="category.value"
+                            aria-label='Kategorie'
+                            @change='onCategoryChange($event, index)'
+                            @filter='onCategoryFilter($event, index)'
+                            :options="availableCategoryOptions(index)"
+                            :autoFilter=true
+                        />
                         <cv-button @click="onAddCategory" type="button" kind="secondary" size="sm">Přidat kategorii</cv-button>
                     </div>
                     <cv-text-input v-model="form.eshop" label="E-shop firmy" />
@@ -94,6 +102,10 @@ export default {
             type: Object,
             default: () => null,
         },
+        allCategories: {
+            type: Array,
+            required: true,
+        },
     },
     computed: {
         title() {
@@ -121,17 +133,15 @@ export default {
     },
     methods: {
         availableCategoryOptions(index) {
-            if (this.categoryFilters[index] === '') {
-                return this.categoryOptions;
-            }
             const filteredCategoryAlreadyInOptions = this.categoryOptions.some(category => category.value === this.categoryFilters[index])
-            if (filteredCategoryAlreadyInOptions) {
+            if (!this.categoryFilters[index] || filteredCategoryAlreadyInOptions) {
                 return this.categoryOptions;
             }
+            const newCategoryValue = this.categoryFilters[index]
             const newCategory = {
-                name: this.categoryFilters[index],
-                label: this.categoryFilters[index],
-                value: this.categoryFilters[index]
+                name: newCategoryValue,
+                label: newCategoryValue,
+                value: newCategoryValue
             }
             return [newCategory, ...this.categoryOptions];
         },
@@ -223,8 +233,20 @@ export default {
                     value: category
                 }
             })
-            // TODO this is a hack and we should get all categories from the parent
-            this.categoryOptions = [...this.selectedCategories]
+            if (this.selectedCategories.length === 0) {
+                this.selectedCategories = [{
+                    name: '',
+                    label: '',
+                    value: ''
+                }]
+            }
+            this.categoryOptions = this.allCategories.map(category => {
+                return {
+                    name: category,
+                    label: category,
+                    value: category
+                }
+            })
             this.toSaveCategories = [...this.selectedCategories]
 
         }

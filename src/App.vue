@@ -27,7 +27,7 @@
                         <cv-button kind="ghost" class="grey-text" @click="showModal = true">
                             Přidat novou firmu<add-icon />
                         </cv-button>
-
+<!--                        Todo pass the :allCategories="itemsToCategories(items) to the EditModal component-->
                         <EditModal v-model:visible="showModal" />
 
                     </cv-side-nav>
@@ -55,7 +55,7 @@
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
-                            <ItemTile v-for=" item  in  items " :key="item.objectID" :item="item" />
+                            <ItemTile v-for=" item  in  items " :key="item.objectID" :item="item" :allCategories="itemsToCategories(items)" />
                         </div>
                     </template>
                 </ais-hits>
