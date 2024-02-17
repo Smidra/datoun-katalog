@@ -55,6 +55,7 @@
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
+<!--                            TODO passing the categories doesn't work well with the pagination. We need to fetch all possible categories somehow-->
                             <ItemTile v-for=" item  in  items " :key="item.objectID" :item="item" :allCategories="itemsToCategories(items)" />
                         </div>
                     </template>
