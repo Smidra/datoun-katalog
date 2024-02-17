@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <ais-instant-search :search-client="searchClient" index-name="firmy">
-            <ais-configure :query="searchQuery" />
+            <ais-configure :query="searchQuery" :hitsPerPage="hitsPerPage" :page="page - 1" />
             <!-- Header -->
             <cv-header aria-label="Carbon header">
                 <cv-header-menu-button class="hamburger-menu" aria-label="Header menu" aria-controls="side-nav"
@@ -36,7 +36,22 @@
             </cv-header>
 
             <!-- Main Content -->
-            <main>
+            <main id="#main-content">
+                <div class="top-pagination">
+                    <ais-pagination>
+                        <template v-slot="{ nbHits }">
+                            <cv-pagination @change="onPaginationChange" :number-of-items="nbHits" :page="page"
+                                pageSizesLabel="Firem na stránku:">
+                                <template v-slot:range-text="{ scope }">
+                                    <span>{{ scope.start }}-{{ scope.end }} ze {{ scope.items }}</span>
+                                </template>
+                                <template v-slot:of-n-pages="{ scope }">
+                                    <span>ze {{ scope.pages }} stránek</span>
+                                </template>
+                            </cv-pagination>
+                        </template>
+                    </ais-pagination>
+                </div>
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
@@ -52,7 +67,8 @@
   
 <script src="./script.js"></script>
 
-<style src="./style.css"></style>
+<style src="./style.css">
+</style>
 <style scoped>
 :deep(.hamburger-menu) {
     display: none;

@@ -1,7 +1,7 @@
 #app {
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    /* margin-top: 60px; */
 }
 
 .bx--side-nav {
@@ -9,10 +9,21 @@
     width: 16rem !important;
 }
 
-.main-content {
-    grid-column: 2;
-    padding: 1rem;
-    margin-left: 16rem;
+.top-pagination {
+    position: sticky;
+    top: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    z-index: 1;
+    background-color: white;
+}
+
+main {
+    position: relative;
+    margin-left: 17rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
 }
 
 .bx--side-nav__header-navigation {
@@ -34,8 +45,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 1rem;
-    margin-left: 17rem;
-    margin-right: 1rem;
 }
 
 .tile-content {
