@@ -66,5 +66,14 @@ export default {
         reloadPage() {
             location.reload();
         },
+        itemsToCategories(items) {
+            const kategorie = new Set()
+            items.forEach(item => {
+                item.kategorie0?.forEach(kategorie0 => kategorie.add(kategorie0))
+                item.kategorie1?.forEach(kategorie1 => kategorie.add(kategorie1))
+                item.kategorie2?.forEach(kategorie2 => kategorie.add(kategorie2))
+            })
+            return [...kategorie]
+        }
     },
 };

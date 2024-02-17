@@ -59,7 +59,7 @@
             </company-detail-modal>
             <!-- <edit-modal v-model:visible="isEditModalOpen" :editedItem="item" :key="editModalKey"
                 @update:isOpen="updateEditModalState" :newCompany="false"></edit-modal> -->
-            <edit-modal v-model:visible="isEditModalOpen" :editedItem="item" :newCompany="false"></edit-modal>
+            <edit-modal v-model:visible="isEditModalOpen" :editedItem="item" :newCompany="false" :allCategories="allCategories"></edit-modal>
         </div>
     </cv-tile>
 </template>
@@ -82,6 +82,10 @@ export default {
             type: Object,
             required: true
         },
+        allCategories: {
+            type: Array,
+            required: true
+        }
     },
     name: 'ItemTile',
     computed: {
