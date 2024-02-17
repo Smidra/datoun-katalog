@@ -1,5 +1,5 @@
 <template>
-    <cv-modal @primary-click="sendForm" kind="danger" @modal-shown="focusInputField">
+    <cv-modal @primary-click="sendForm" kind="danger" @modal-shown="focusNameInputField">
         <template v-slot:label>
             <div class="label-padding">
                 Tvoje IP je {{ ipAddress }}.
@@ -84,18 +84,14 @@ export default {
         'editing-icon': EditingIcon,
     },
     props: {
-        newCompany: {
-            type: Boolean,
-            default: false,
-        },
         editedItem: {
             type: Object,
-            default: () => ({}),
+            default: () => null,
         },
     },
     computed: {
         title() {
-            if (this.newCompany) {
+            if (this.editedItem == null) {
                 return 'Nová firma';
             }
             let has_vyrobna = this.editedItem.vyrobny && this.editedItem.vyrobny.length > 0
@@ -114,7 +110,7 @@ export default {
         };
     },
     methods: {
-        focusInputField() {
+        focusNameInputField() {
             if (this.$refs['name-input'] && this.$refs['name-input'].$el) {
                 const inputElement = this.$refs['name-input'].$el.querySelector('input');
                 if (inputElement) {
@@ -132,17 +128,7 @@ export default {
                 const client = algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3');
                 const index = client.initIndex('firmy');
 
-                // Prepare the object data
-                let objectData = { ...this.form };
-
-                // If new-company is false, use item.objectID as the object ID
-                if (!this.newCompany) {
-                    console.log('newCompany is false');
-                    objectData.objectID = this.editedItem.objectID;
-                }
-
-                // Add or update the object
-                await index.saveObject(objectData, { autoGenerateObjectIDIfNotExist: true });
+                await index.saveObject(this.form, { autoGenerateObjectIDIfNotExist: true });
 
                 this.message = 'Form submitted successfully!';
                 // Reloading the page is a bit ugly but works for now.
@@ -156,12 +142,12 @@ export default {
         },
     },
     created() {
-        if (!this.newCompany) {
+        if (this.editedItem != null) {
             this.form = { ...this.editedItem };
         }
     },
     async mounted() {
-        this.focusInputField();
+        this.focusNameInputField();
         this.ipAddress = await getIP();
     },
 };
