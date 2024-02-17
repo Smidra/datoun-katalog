@@ -1,10 +1,11 @@
 import { CvHeader, CvHeaderMenuButton, CvSkipToContent, CvHeaderName, CvSearch, CvSideNav } from '@carbon/vue';
-import { AisInstantSearch, AisHits, AisHierarchicalMenu, AisConfigure, AisPagination, AisStateResults } from 'vue-instantsearch/vue3/es';
+import { AisInstantSearch, AisHits, AisHierarchicalMenu, AisConfigure, AisStateResults } from 'vue-instantsearch/vue3/es';
 import algoliasearch from 'algoliasearch';
 import HierarchicalMenu from './components/HierarchicalMenu.vue';
 import ItemTile from './components/ItemTile.vue';
 import Add16 from '@carbon/icons-vue/es/add/16';
 import EditModal from './components/EditModal.vue';
+import AboutModal from './components/AboutModal.vue';
 
 export default {
     name: 'App',
@@ -21,21 +22,20 @@ export default {
         AisHits,
         AisHierarchicalMenu,
         AisConfigure,
-        AisPagination,
         AisStateResults,
         'add-icon': Add16,
         EditModal,
+        AboutModal,
     },
     data() {
         return {
             expandedSideNav: window.innerWidth > 768,
             useFixed: true,
-            hitsPerPage: 20,
-            page: 1,
             searchQuery: '',
             searchResults: [],
             searchClient: algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3'),
             showModal: false,
+            showAbout: false,
         };
     },
     mounted() {
@@ -58,10 +58,6 @@ export default {
         },
         handleClick(item, refine) {
             refine(item.value);
-        },
-        onPaginationChange(data) {
-            this.hitsPerPage = data.length;
-            this.page = data.page;
         },
         reloadPage() {
             location.reload();
