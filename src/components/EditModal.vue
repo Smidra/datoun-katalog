@@ -49,7 +49,6 @@
                     <br />
                     <cv-text-input v-model="form.aliasy" @input="handleInput" label="Značky & Aliasy" />
 
-
                     <p v-if="message">{{ message }}</p>
                 </cv-form>
             </div>
@@ -99,7 +98,7 @@ export default {
     props: {
         newCompany: {
             type: Boolean,
-            default: undefined,
+            default: false,
         },
         editedItem: {
             type: Object,
@@ -133,6 +132,9 @@ export default {
                 }
             }
         },
+        reloadPage() {
+            location.reload();
+        },
         async sendForm() {
             this.isLoading = true;
             try {
@@ -153,6 +155,8 @@ export default {
                 await index.saveObject(objectData, { autoGenerateObjectIDIfNotExist: true });
 
                 this.message = 'Form submitted successfully!';
+                // Reloading the page is a bit ugly but works for now.
+                this.reloadPage()
             } catch (error) {
                 this.message = 'An error occurred while submitting the form.';
                 console.error(error); // Log the error for debugging
