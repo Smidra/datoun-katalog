@@ -34,7 +34,8 @@ Data is formatted as the following JSON, here comments are added to all fields.
     "Zdraví a drogerie"
   ],
   "kategorie1": [
-    "Zdraví a drogerie > Drogerie"
+    "Zdraví a drogerie > Drogerie",
+    "Zdraví a drogerie > Blbosti"
   ],
   "kategorie2": [
     "Zdraví a drogerie > Drogerie > Parfémy a voňavky"
@@ -71,15 +72,15 @@ Array of strings. Hierary is composed of strings separated by " > ". Company doe
 Example of simple allowed hierarchy.
 ```
 "kategorie0": [
-    "A1"
+    "A1",
     "A2"
 ],
 "kategorie1": [
-    "A1 > B1"
+    "A1 > B1",
     "A1 > B2"
 ],
 "kategorie2": [
-    "A1 > B1 > C1"
+    "A1 > B1 > C1",
     "A1 > B1 > C2"
 ],
 ```
