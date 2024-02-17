@@ -40,8 +40,8 @@
                 <div class="top-pagination">
                     <ais-pagination>
                         <template v-slot="{ nbHits }">
-                            <cv-pagination @change="onPaginationChange" :number-of-items="nbHits" :page="page"
-                                pageSizesLabel="Firem na stránku:">
+                            <cv-pagination @change="onPaginationChange" :number-of-items="nbHits" :page="page" :pageSizes="[
+                                12, { 'value': 15, 'selected': true }, 24, 48]" pageSizesLabel="Firem na stránku:">
                                 <template v-slot:range-text="{ scope }">
                                     <span>{{ scope.start }}-{{ scope.end }} ze {{ scope.items }}</span>
                                 </template>
@@ -55,7 +55,7 @@
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
-                            <ItemTile v-for="item in items" :key="item.objectID" :item="item" />
+                            <ItemTile v-for=" item  in  items " :key="item.objectID" :item="item" />
                         </div>
                     </template>
                 </ais-hits>
