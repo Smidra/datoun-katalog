@@ -31,7 +31,7 @@ export default {
             expandedSideNav: window.innerWidth > 768,
             useFixed: true,
             hitsPerPage: 20,
-            page: 3,
+            page: 1,
             searchQuery: '',
             searchResults: [],
             searchClient: algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3'),
