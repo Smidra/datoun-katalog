@@ -47,16 +47,16 @@
                     </div>
                 </div>
             </div>
-            <!-- <my-modal v-if="isModalOpen" :item="item" :key="modalKey" :is-open="isModalOpen"
+            <!-- <company-detail-modal v-if="isModalOpen" :item="item" :key="modalKey" :is-open="isModalOpen"
                 @update:isOpen="updateModalState" @other-btn-click="onOtherBtnClick" @secondary-click="openEshop">
-            </my-modal>
+            </company-detail-modal>
             <edit-modal v-if="isEditModalOpen" :editedItem="item" :is-open="isEditModalOpen" :key="editModalKey"
                 @update:isOpen="updateEditModalState" :newCompany="false"></edit-modal> -->
-            <!-- <my-modal v-model:isOpen="isModalOpen" :item="item" :key="modalKey" @update:isOpen="updateModalState"
+            <!-- <company-detail-modal v-model:isOpen="isModalOpen" :item="item" :key="modalKey" @update:isOpen="updateModalState"
                 @other-btn-click="onOtherBtnClick" @secondary-click="openEshop">
-            </my-modal> -->
-            <my-modal v-model:visible="isModalOpen" :item="item" @other-btn-click="onOtherBtnClick">
-            </my-modal>
+            </company-detail-modal> -->
+            <company-detail-modal v-model:visible="isModalOpen" :item="item" @other-btn-click="onOtherBtnClick">
+            </company-detail-modal>
             <!-- <edit-modal v-model:visible="isEditModalOpen" :editedItem="item" :key="editModalKey"
                 @update:isOpen="updateEditModalState" :newCompany="false"></edit-modal> -->
             <edit-modal v-model:visible="isEditModalOpen" :editedItem="item" :newCompany="false"></edit-modal>
@@ -70,7 +70,7 @@ import ErrorIcon from '@carbon/icons-vue/es/error/16';
 import IncompleteIcon from '@carbon/icons-vue/es/incomplete/16';
 import SuccessIcon from '@carbon/icons-vue/es/checkmark--filled/16';
 import LaunchIcon from '@carbon/icons-vue/es/launch/16';
-import MyModal from './MyModal.vue';
+import CompanyDetailModal from './CompanyDetailModal.vue';
 import EditModal from './EditModal.vue'; // Make sure to create this component
 
 import { getLeaves, getUniqueBradcrumbs } from './KategorieTool.js';
@@ -98,7 +98,7 @@ export default {
         'success-icon': SuccessIcon,
         'launch-icon': LaunchIcon,
         'edit-modal': EditModal,
-        MyModal,
+        CompanyDetailModal,
     },
     methods: {
         openModal() {

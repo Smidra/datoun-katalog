@@ -2,7 +2,7 @@ import { CvHeader, CvHeaderMenuButton, CvSkipToContent, CvHeaderName, CvSearch, 
 import { AisInstantSearch, AisHits, AisHierarchicalMenu, AisConfigure, AisStateResults } from 'vue-instantsearch/vue3/es';
 import algoliasearch from 'algoliasearch';
 import HierarchicalMenu from './components/HierarchicalMenu.vue';
-import ItemTile from './components/ItemTIle.vue';
+import ItemTile from './components/ItemTile.vue';
 import Add16 from '@carbon/icons-vue/es/add/16';
 import EditModal from './components/EditModal.vue';
 
