@@ -9,31 +9,13 @@
 
         <template v-slot:title>
             <div class="modal-title-container">
-
-                <!-- Editing -->
-                <div v-if="newCompany == false">
-                    <h2 class="modal-title">
-                        {{ editedItem?.jmeno_firmy }}, {{ editedItem?.vyrobny
-                            &&
-                            editedItem.vyrobny.length > 0
-                            ? editedItem.vyrobny[0].lokalita.hezkyNazev : '' }}
-                        <editing-icon class="editing-icon" />
-                    </h2>
-                    <p class="subtitle bx--tile__subtitle">
-                        S velkou mocí přichází i velká zodpovědnost.
-                    </p>
-                </div>
-
-                <!-- Creating new company -->
-                <div v-else-if="newCompany == true">
-                    <h2 class="modal-title">
-                        Nová firma <editing-icon class="editing-icon" />
-                    </h2>
-                    <p class="subtitle bx--tile__subtitle">
-                        S velkou mocí přichází i velká zodpovědnost.
-                    </p>
-                </div>
-
+                <h2 class="modal-title">
+                    {{ title }}
+                    <editing-icon class="editing-icon" />
+                </h2>
+                <p class="subtitle bx--tile__subtitle">
+                    S velkou mocí přichází i velká zodpovědnost.
+                </p>
             </div>
         </template>
 
@@ -103,6 +85,18 @@ export default {
         CvTextArea,
         'editing-icon': EditingIcon,
     },
+    computed: {
+        title() {
+            if (this.newCompany) {
+                return 'Nová firma';
+            }
+            let has_vyrobna = this.editedItem.vyrobny && this.editedItem.vyrobny.length > 0
+            if (has_vyrobna) {
+                return `${this.editedItem.jmeno_firmy}, ${this.editedItem.vyrobny[0].lokalita.hezkyNazev}`;
+            }
+            return this.editedItem.jmeno_firmy;
+        },
+    },
     props: {
         isOpen: {
             type: Boolean,
@@ -155,7 +149,6 @@ export default {
             }
         },
         async sendForm() {
-            console.log('sendForm started');
             this.isLoading = true;
             try {
                 // Initialize Algolia client
