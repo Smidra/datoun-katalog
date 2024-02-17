@@ -83,6 +83,16 @@ export default {
         CvTextArea,
         'editing-icon': EditingIcon,
     },
+    props: {
+        newCompany: {
+            type: Boolean,
+            default: false,
+        },
+        editedItem: {
+            type: Object,
+            default: () => ({}),
+        },
+    },
     computed: {
         title() {
             if (this.newCompany) {
@@ -93,16 +103,6 @@ export default {
                 return `${this.editedItem.jmeno_firmy}, ${this.editedItem.vyrobny[0].lokalita.hezkyNazev}`;
             }
             return this.editedItem.jmeno_firmy;
-        },
-    },
-    props: {
-        newCompany: {
-            type: Boolean,
-            default: false,
-        },
-        editedItem: {
-            type: Object,
-            default: () => ({}),
         },
     },
     data() {
