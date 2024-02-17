@@ -1,6 +1,6 @@
 <template>
-    <cv-modal @primary-click="sendForm" kind="danger" :visible="isOpen" @visible="updateIsOpen"
-        @modal-shown="focusInputField" @hide="handleHide">
+    <cv-modal @primary-click="sendForm" kind="danger"
+        @modal-shown="focusInputField">
         <template v-slot:label>
             <div class="label-padding">
                 Tvoje IP je {{ ipAddress }}.
@@ -76,7 +76,6 @@ import { CvForm, CvTextInput, CvTextArea } from '@carbon/vue';
 import EditingIcon from '@carbon/icons-vue/es/edit/32';
 import algoliasearch from 'algoliasearch';
 import getIP from '../utils/GetIP.js';
-// import axios from 'axios';
 
 export default {
     components: {
@@ -98,10 +97,6 @@ export default {
         },
     },
     props: {
-        isOpen: {
-            type: Boolean,
-            default: false
-        },
         newCompany: {
             type: Boolean,
             default: undefined,
@@ -123,16 +118,6 @@ export default {
         };
     },
     methods: {
-        updateIsOpen(newVal) {
-            this.$emit('update:isOpen', newVal);
-            // Focus on the input field when the modal opens
-            if (newVal) {
-                this.focusInputField();
-            }
-        },
-        handleHide() {
-            this.$emit('update:isOpen', false);
-        },
         handleInput() {
             console.log('tagInput: ', this.tagInput);
             if (this.tagInput.endsWith(',')) {
@@ -168,7 +153,6 @@ export default {
                 await index.saveObject(objectData, { autoGenerateObjectIDIfNotExist: true });
 
                 this.message = 'Form submitted successfully!';
-                this.$emit('update:isOpen', false); // Close the modal after successful submission
             } catch (error) {
                 this.message = 'An error occurred while submitting the form.';
                 console.error(error); // Log the error for debugging
@@ -183,6 +167,7 @@ export default {
         }
     },
     async mounted() {
+        this.focusInputField();
         this.ipAddress = await getIP();
     },
 };
