@@ -39,6 +39,10 @@
                             </cv-dropdown>
                         </div>
                     </div>
+                    <div>
+                        <cv-combo-box v-for="(category, index) in selectedCategories" :key="category.value" :value="category.value" aria-label='Kategorie' @change='onCategoryChange($event, index)' @filter='onCategoryFilter($event, index)' :options="availableCategoryOptions(index)"/>
+                        <cv-button @click="onAddCategory" type="button" kind="secondary" size="sm">Přidat kategorii</cv-button>
+                    </div>
                     <cv-text-input v-model="form.eshop" label="E-shop firmy" />
                     <br />
                     <cv-text-input v-model="form.logo" label="Logo firmy" />
@@ -71,16 +75,18 @@
 </template>
 
 <script>
-import { CvForm, CvTextInput, CvTextArea } from '@carbon/vue';
+import { CvForm, CvTextInput, CvTextArea, CvComboBox } from '@carbon/vue';
 import EditingIcon from '@carbon/icons-vue/es/edit/32';
 import algoliasearch from 'algoliasearch';
 import getIP from '../utils/GetIP.js';
+import {extractCategories} from "@/utils/category_parse";
 
 export default {
     components: {
         CvForm,
         CvTextInput,
         CvTextArea,
+        CvComboBox,
         'editing-icon': EditingIcon,
     },
     props: {
@@ -107,9 +113,35 @@ export default {
             isLoading: false,
             message: '',
             ipAddress: '',
+            categoryOptions: [],
+            categoryFilters: {},
+            selectedCategories: [],
+            toSaveCategories: []
         };
     },
     methods: {
+        availableCategoryOptions(index) {
+            if (this.categoryFilters[index] === '') {
+                return this.categoryOptions;
+            }
+            const filteredCategoryAlreadyInOptions = this.categoryOptions.some(category => category.value === this.categoryFilters[index])
+            if (filteredCategoryAlreadyInOptions) {
+                return this.categoryOptions;
+            }
+            const newCategory = {
+                name: this.categoryFilters[index],
+                label: this.categoryFilters[index],
+                value: this.categoryFilters[index]
+            }
+            return [newCategory, ...this.categoryOptions];
+        },
+        onAddCategory() {
+            this.selectedCategories.push({
+                name: 'x',
+                label: 'x',
+                value: 'x'
+            })
+        },
         focusNameInputField() {
             if (this.$refs['name-input'] && this.$refs['name-input'].$el) {
                 const inputElement = this.$refs['name-input'].$el.querySelector('input');
@@ -121,8 +153,41 @@ export default {
         reloadPage() {
             location.reload();
         },
+        onCategoryChange(x, input) {
+            this.toSaveCategories[input] = {
+                name: x,
+                label: x,
+                value: x
+            }
+        },
+        onCategoryFilter(categoryFilter, input) {
+            this.categoryFilters[input] = categoryFilter
+            this.onCategoryChange(categoryFilter, input)
+        },
         async sendForm() {
             this.isLoading = true;
+
+            const kategorie0 = new Set()
+            const kategorie1 = new Set()
+            const kategorie2 = new Set()
+            // Make sure we have all the categories in all levels.
+            this.toSaveCategories.forEach(category => {
+                const extractedCategories = extractCategories(category.name)
+                if (extractedCategories.length > 0) {
+                    kategorie0.add(extractedCategories[0])
+                }
+                if (extractedCategories.length > 1) {
+                    kategorie1.add(extractedCategories.slice(0,2).join(" > "))
+                }
+                if (extractedCategories.length > 2) {
+                    kategorie2.add(extractedCategories.join(" > "))
+                }
+            })
+
+            this.form.kategorie0 = [...kategorie0]
+            this.form.kategorie1 = [...kategorie1]
+            this.form.kategorie2 = [...kategorie2]
+
             try {
                 // Initialize Algolia client
                 const client = algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3');
@@ -146,6 +211,22 @@ export default {
     created() {
         if (this.editedItem != null) {
             this.form = { ...this.editedItem };
+            let selectedCategories = this.editedItem?.kategorie2 || []
+            const notIncludedCategories1 = this.editedItem.kategorie1?.filter(category1 => selectedCategories.every(selectedCategory => !selectedCategory.startsWith(category1))) || []
+                selectedCategories.push(...notIncludedCategories1)
+            const notIncludedCategories0 = this.editedItem.kategorie0?.filter(category0 => selectedCategories.every(selectedCategory => !selectedCategory.startsWith(category0))) || []
+                selectedCategories.push(...notIncludedCategories0)
+            this.selectedCategories = selectedCategories.map(category => {
+                return {
+                    name: category,
+                    label: category,
+                    value: category
+                }
+            })
+            // TODO this is a hack and we should get all categories from the parent
+            this.categoryOptions = [...this.selectedCategories]
+            this.toSaveCategories = [...this.selectedCategories]
+
         }
     },
     async mounted() {
