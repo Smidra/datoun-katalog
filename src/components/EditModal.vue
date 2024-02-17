@@ -131,6 +131,8 @@ export default {
                 await index.saveObject(this.form, { autoGenerateObjectIDIfNotExist: true });
 
                 this.message = 'Form submitted successfully!';
+                // Wait a short amount of time before reloading the page to make sure Algolia has time to update the index.
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 // Reloading the page is a bit ugly but works for now.
                 this.reloadPage()
             } catch (error) {
