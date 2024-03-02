@@ -6,10 +6,12 @@ import ItemTile from './components/ItemTile.vue';
 import Add16 from '@carbon/icons-vue/es/add/16';
 import EditModal from './components/EditModal.vue';
 import AboutModal from './components/AboutModal.vue';
+import CompanyDetailModal from "@/components/CompanyDetailModal.vue";
 
 export default {
     name: 'App',
     components: {
+        CompanyDetailModal,
         ItemTile,
         HierarchicalMenu,
         CvHeader,
@@ -37,8 +39,12 @@ export default {
             searchQuery: '',
             searchResults: [],
             searchClient: algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3'),
-            showModal: false,
+            showEditModal: false,
             showAbout: false,
+            editedItem: null,
+            editedItemNew: true,
+            detailModalItem: null,
+            showDetailModal: false,
         };
     },
     mounted() {
@@ -46,9 +52,6 @@ export default {
         // Add resize event listener on component mount
         window.addEventListener('resize', this.handleResize);
         this.handleResize();  // Call the method on initial load
-        this.$nextTick(() => {
-            // console.log(this.items);
-        });
     },
     beforeUnmount() {
         // Remove resize event listener before component unmount
@@ -59,8 +62,16 @@ export default {
             // Update expandedSideNav based on window width
             this.expandedSideNav = window.innerWidth > 768;
         },
-        handleClick(item, refine) {
-            refine(item.value);
+        handleEditOpen() {
+            this.editedItem = {...this.detailModalItem};
+            this.showDetailModal = false;
+            this.showEditModal = true;
+            this.editedItemNew = false;
+        },
+        handleCreateNew() {
+            this.editedItem = null;
+            this.showEditModal = true;
+            this.editedItemNew = true;
         },
         onPaginationChange(data) {
             this.hitsPerPage = data.length;
@@ -69,5 +80,8 @@ export default {
         reloadPage() {
             location.reload();
         },
+        handleOpenEshop(url) {
+            window.open(url, '_blank');
+        }
     },
 };
