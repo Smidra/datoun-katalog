@@ -143,6 +143,12 @@ export default {
             }
         },
     },
+    watch: {
+      // once source item updates, copy into local form
+      editedItem(newEditedItem) {
+        this.form = newEditedItem ? { ...newEditedItem } : {};
+      }
+    },
     created() {
         if (this.editedItem != null) {
             this.form = { ...this.editedItem };
