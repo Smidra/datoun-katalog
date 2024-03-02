@@ -1,5 +1,5 @@
 <template>
-    <cv-modal ref="CompanyDetailModal" :visible="isOpen" @secondary-click="openEshop">
+    <cv-modal ref="CompanyDetailModal" :visible="isOpen" @secondary-click="$emit('open-eshop', item.eshop)" @other-btn-click="$emit('edit')">
         <!-- Header of the modal -->
         <template v-slot:title>
             <div class="modal-title-container">
@@ -7,27 +7,27 @@
                 <!-- Left part -->
                 <div>
                     <h2 class="modal-title">
-                        {{ item.jmeno_firmy }}
-                        <unknown-icon v-if="item.semafor === undefined" class="icon-unknown factory-icon-modal" />
-                        <error-icon v-else-if="item.semafor === '10'" class="icon-error factory-icon-modal" />
-                        <incomplete-icon v-else-if="item.semafor === '20'" class="icon-in-progress factory-icon-modal" />
-                        <success-icon v-else-if="item.semafor === '30'" class="icon-success factory-icon-modal" />
+                        {{ item?.jmeno_firmy }}
+                        <unknown-icon v-if="item?.semafor === undefined" class="icon-unknown factory-icon-modal" />
+                        <error-icon v-else-if="item?.semafor === '10'" class="icon-error factory-icon-modal" />
+                        <incomplete-icon v-else-if="item?.semafor === '20'" class="icon-in-progress factory-icon-modal" />
+                        <success-icon v-else-if="item?.semafor === '30'" class="icon-success factory-icon-modal" />
                     </h2>
                     <p class="subtitle bx--tile__subtitle">
-                        <span v-if="item.semafor === undefined" class="icon-unknown factory-icon">Nevíme kde
+                        <span v-if="item?.semafor === undefined" class="icon-unknown factory-icon">Nevíme kde
                             vyrábí.</span>
-                        <span v-else-if="item.semafor === '10'" class="icon-error factory-icon">Nevyrábí v
+                        <span v-else-if="item?.semafor === '10'" class="icon-error factory-icon">Nevyrábí v
                             ČR.</span>
-                        <span v-else-if="item.semafor === '20'" class="icon-in-progress factory-icon">Vyrábí částečně v
+                        <span v-else-if="item?.semafor === '20'" class="icon-in-progress factory-icon">Vyrábí částečně v
                             ČR.</span>
-                        <span v-else-if="item.semafor === '30'" class="icon-success factory-icon">Vyrábí v ČR, {{
-                            item.vyrobny ? item.vyrobny[0].lokalita.hezkyNazev : "" }}</span>
+                        <span v-else-if="item?.semafor === '30'" class="icon-success factory-icon">Vyrábí v ČR, {{
+                            item?.vyrobny ? item?.vyrobny[0].lokalita.hezkyNazev : "" }}</span>
                     </p>
                 </div>
 
                 <!-- Right part -->
                 <div class="tile-logo-container">
-                    <img :src="item.logo" alt="Logo" class="tile-logo bx--tile__icon">
+                    <img :src="item?.logo" alt="Logo" class="tile-logo bx--tile__icon">
                 </div>
 
             </div>
@@ -38,12 +38,12 @@
             <div class="modal-content">
                 <!-- Show comments on company -->
                 <h4>Poznámky k výrobě</h4>
-                <p>{{ item.poznamky_k_vyrobe }}</p>
+                <p>{{ item?.poznamky_k_vyrobe }}</p>
                 <br />
 
                 <h4>Místa</h4>
                 <cv-list class="list-container">
-                    <cv-list-item v-for="(vyrobna, index) in item.vyrobny" :key="index">{{ vyrobna.lokalita.hezkyNazev
+                    <cv-list-item v-for="(vyrobna, index) in item?.vyrobny" :key="index">{{ vyrobna.lokalita.hezkyNazev
                     }} ({{ vyrobna.lokalita.adresaUradu.kraj }}, {{ vyrobna.lokalita.adresaUradu.PSC
 }})</cv-list-item>
                 </cv-list>
@@ -51,7 +51,7 @@
 
                 <!-- Show description -->
                 <h4>Popisek firmy</h4>
-                <p>{{ item.popisek_firmy }}</p>
+                <p>{{ item?.popisek_firmy }}</p>
                 <br />
 
                 <!-- Show categories -->
@@ -63,15 +63,9 @@
 
                 <!-- If there are aliases, show -->
                 <!-- <template v-if="(item.aliasy != undefined) && (item.aliasy.length > 0)"> -->
-                <template v-if="(item.aliasy != undefined) && (item.aliasy != '')">
+                <template v-if="(item?.aliasy != undefined) && (item?.aliasy != '')">
                     <h4>Značky & Aliasy</h4>
-                    <p>{{ item.aliasy }}
-
-                        <!-- <span v-for="(alias, index) in item.aliasy" :key="index">
-                            {{ alias }}
-                            <span v-if="index !== item.aliasy.length - 1">, </span>
-                        </span> -->
-                    </p>
+                    <p>{{ item?.aliasy }}</p>
                     <br />
                 </template>
 
@@ -130,20 +124,10 @@ export default {
             default: () => ({})
         }
     },
-    methods: {
-        showModal() {
-            this.$refs.CompanyDetailModal.show();
-        },
-        hideModal() {
-            this.$refs.CompanyDetailModal.hide();
-        },
-        openEshop() {
-            window.open(this.item.eshop, '_blank');
-        },
-    },
+    methods: {},
     computed: {
         leaves() {
-            return getUniqueBradcrumbs(this.item.kategorie0, this.item.kategorie1, this.item.kategorie2);
+            return getUniqueBradcrumbs(this.item?.kategorie0, this.item?.kategorie1, this.item?.kategorie2);
         }
     }
 };
@@ -162,16 +146,5 @@ export default {
     align-items: center;
     justify-content: flex-end;
     padding: 1rem;
-}
-
-.modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-.lokality {
-    color: lightgray;
-    font-size: 1em;
 }
 </style>

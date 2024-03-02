@@ -24,12 +24,9 @@
                         </ais-hierarchical-menu>
 
                         <hr class="custom-divider" />
-                        <cv-button kind="ghost" class="grey-text" @click="showModal = true">
+                        <cv-button kind="ghost" class="grey-text" @click="handleCreateNew">
                             Přidat novou firmu<add-icon />
                         </cv-button>
-                        <EditModal v-model:visible="showModal" />
-
-
                         <cv-button kind="ghost" class="grey-text" @click="showAbout = true">
                             O nás
                         </cv-button>
@@ -41,21 +38,23 @@
             </cv-header>
 
             <!-- Main Content -->
-            <main>
+            <main class="padding-top">
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
-                            <ItemTile v-for="item in items" :key="item.objectID" :item="item" />
+                            <ItemTile v-for="item in items" :key="item.objectID" :item="item" @open-company-detail="detailModalItem = $event; showDetailModal = true" @open-eshop="handleOpenEshop" />
                         </div>
                     </template>
                 </ais-hits>
             </main>
 
         </ais-instant-search>
+        <EditModal v-model:visible="showEditModal" :editedItem="editedItem" />
+        <CompanyDetailModal v-model:visible="showDetailModal" :item="detailModalItem" @edit="handleEditOpen()" @open-eshop="handleOpenEshop"/>
         <AboutModal/>
     </div>
 </template>
-  
+
 <script src="./script.js"></script>
 
 <style src="./style.css"></style>
@@ -78,5 +77,9 @@
 .grey-text {
     /* color: #5A6872; */
     color: #0f62fe;
+}
+
+.padding-top {
+  padding-top: 1rem;
 }
 </style>
