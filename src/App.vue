@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <ais-instant-search :search-client="searchClient" index-name="firmy">
-            <ais-configure :query="searchQuery" />
+          <ais-configure :query="searchQuery" :hitsPerPage="hitsPerPage" :page="page - 1" />
             <!-- Header -->
             <cv-header aria-label="Carbon header">
                 <cv-header-menu-button class="hamburger-menu" aria-label="Header menu" aria-controls="side-nav"
@@ -27,6 +27,9 @@
                         <cv-button kind="ghost" class="grey-text" @click="handleCreateNew">
                             Přidat novou firmu<add-icon />
                         </cv-button>
+                        <EditModal v-model:visible="showModal" />
+
+
                         <cv-button kind="ghost" class="grey-text" @click="showAbout = true">
                             O nás
                         </cv-button>
@@ -38,7 +41,7 @@
             </cv-header>
 
             <!-- Main Content -->
-            <main class="padding-top">
+            <main id="#main-content" class="padding-top">
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
@@ -46,6 +49,21 @@
                         </div>
                     </template>
                 </ais-hits>
+              <div class="top-pagination">
+                <ais-pagination>
+                  <template v-slot="{ nbHits }">
+                    <cv-pagination @change="onPaginationChange" :number-of-items="nbHits" :page="page" :pageSizes="[
+                                12, { 'value': 12, 'selected': true }, 24, 48]" pageSizesLabel="Firem na stránku:">
+                      <template v-slot:range-text="{ scope }">
+                        <span>{{ scope.start }}-{{ scope.end }} ze {{ scope.items }}</span>
+                      </template>
+                      <template v-slot:of-n-pages="{ scope }">
+                        <span>ze {{ scope.pages }} stránek</span>
+                      </template>
+                    </cv-pagination>
+                  </template>
+                </ais-pagination>
+              </div>
             </main>
 
         </ais-instant-search>
