@@ -41,7 +41,7 @@
                     </div>
                     <div class="footer-buttons">
                         <!-- Footer right -->
-                        <cv-button class="square-button" kind="tertiary" size="small" @click.stop="$emit('open-eshop', item.eshop)">
+                        <cv-button class="square-button" kind="tertiary" size="small" @click.stop="handleOpenUrl(item.eshop)">
                             <launch-icon />
                         </cv-button>
                     </div>
@@ -57,8 +57,8 @@ import ErrorIcon from '@carbon/icons-vue/es/error/16';
 import IncompleteIcon from '@carbon/icons-vue/es/incomplete/16';
 import SuccessIcon from '@carbon/icons-vue/es/checkmark--filled/16';
 import LaunchIcon from '@carbon/icons-vue/es/launch/16';
-
-import { getLeaves, getUniqueBradcrumbs } from './KategorieTool.js';
+import { getLeaves, getUniqueBradcrumbs } from '@/utils/KategorieTool';
+import {handleOpenUrl} from "@/utils/URLtools";
 
 
 export default {
@@ -84,6 +84,7 @@ export default {
         'launch-icon': LaunchIcon,
     },
     methods: {
+      handleOpenUrl,
         openModal() {
             this.$emit('open-company-detail', this.item);
         },
@@ -91,7 +92,7 @@ export default {
     data() {
         return {
             isModalOpen: false,
-            modalKey: 0, // Add this line
+            modalKey: 0,
             isEditModalOpen: false,
             editModalKey: 0,
         };
@@ -134,7 +135,7 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0rem;
+    padding: 0;
 }
 
 .bx--tile__subtitle {
@@ -153,12 +154,11 @@ export default {
 
 .tile-logo {
     height: 35px;
-    /* height: 50px; */
 }
 
 .tile-body {
     flex-grow: 1;
-    padding: 0rem;
+    padding: 0;
 }
 
 .tile-text-container {
@@ -189,10 +189,6 @@ export default {
     flex-direction: column;
     justify-content: flex-end;
     /* aligns items to the bottom */
-}
-
-.tile-button {
-    white-space: nowrap;
 }
 
 @media (max-width: 600px) {
