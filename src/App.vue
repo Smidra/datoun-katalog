@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <ais-instant-search :search-client="searchClient" index-name="firmy">
-            <ais-configure :query="searchQuery" />
+          <ais-configure :query="searchQuery" :hitsPerPage="hitsPerPage" :page="page - 1" />
             <!-- Header -->
             <cv-header aria-label="Carbon header">
                 <cv-header-menu-button class="hamburger-menu" aria-label="Header menu" aria-controls="side-nav"
