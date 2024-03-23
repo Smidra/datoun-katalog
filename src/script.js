@@ -7,10 +7,12 @@ import Add16 from '@carbon/icons-vue/es/add/16';
 import EditModal from './components/EditModal.vue';
 import AboutModal from './components/AboutModal.vue';
 import CompanyDetailModal from "@/components/CompanyDetailModal.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
     name: 'App',
     components: {
+        Pagination,
         CompanyDetailModal,
         ItemTile,
         HierarchicalMenu,

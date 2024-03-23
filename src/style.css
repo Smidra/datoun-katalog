@@ -17,6 +17,25 @@
     background-color: white;
 }
 
+.bottom-absolute {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 1;
+}
+
+.bottom-pagination {
+    position: relative;
+    margin-left: 17rem;
+    margin-right: 1rem;
+    margin-top: 3rem;
+    bottom: 0rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    z-index: 1;
+    background-color: white;
+}
+
 main {
     position: relative;
     margin-left: 17rem;
@@ -122,7 +141,7 @@ main {
     align-items: center;
 }
 
-.button-content>*:first-child {
+.button-content > *:first-child {
     margin-right: 0.5em;
 }
 
