@@ -58,7 +58,6 @@
         <!-- Footer of the modal - Buttons -->
         <template v-slot:secondary-button>
             <div class="button-content">
-                <!-- <launch-icon /> -->
                 Zavřít
             </div>
         </template>

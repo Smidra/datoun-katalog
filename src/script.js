@@ -40,7 +40,7 @@ export default {
             searchResults: [],
             searchClient: algoliasearch('S27OT8U78J', '995efbd2d821e03836317ed9c20812a3'),
             showEditModal: false,
-            showAbout: false,
+            showAboutModal: false,
             editedItem: null,
             editedItemNew: true,
             detailModalItem: null,

@@ -92,7 +92,7 @@
 
 <script>
 import { CvModal, CvList, CvListItem } from '@carbon/vue';
-import { getUniqueBradcrumbs } from './KategorieTool.js';
+import { getUniqueBradcrumbs } from '../utils/KategorieTool.js';
 import LaunchIcon from '@carbon/icons-vue/es/launch/16';
 import EditIcon from '@carbon/icons-vue/es/edit/16';
 import UnknownIcon from '@carbon/icons-vue/es/unknown/16';
@@ -136,7 +136,6 @@ export default {
 <style scoped>
 .tile-logo {
     height: 35px;
-    /* height: 50px; */
 }
 
 .tile-logo-container {

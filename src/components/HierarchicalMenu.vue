@@ -1,7 +1,5 @@
 <template>
     <ul class="cv-side-nav-menu bx--side-nav__item">
-        <!-- <h4 class="category-title">Menu </h4>
-        <hr class="custom-divider" /> -->
         <li v-for="item in flattenedItems" :key="item.value" :class="{ 'bx--side-nav__item--active': item.isRefined }">
             <button class="bx--side-nav__submenu" @click="handleClick(item)"
                 :style="{ fontWeight: item.isRefined ? 'bold' : 'normal', paddingLeft: `${item.depth * 1.5}rem` }">
@@ -28,8 +26,6 @@ export default {
     props: ['items', 'refine', 'canRefine'],
     computed: {
         flattenedItems() {
-            // console.log('Can I refine?')
-            // console.log(this.canRefine)
 
             let stack = [...this.items.map(item => ({ ...item, depth: 0 }))];
             let flattened = [];
@@ -66,11 +62,4 @@ export default {
 .cv-side-nav-menu {
     padding-top: 1rem;
 }
-
-/*
-.bx--side-nav__submenu {
-    height: 1.5rem;
-    font-size: 1rem;
-}
-*/
 </style>

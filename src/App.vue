@@ -30,10 +30,10 @@
                         <EditModal v-model:visible="showModal" />
 
 
-                        <cv-button kind="ghost" class="grey-text" @click="showAbout = true">
+                        <cv-button kind="ghost" class="grey-text" @click="showAboutModal = true">
                             O nás
                         </cv-button>
-                        <AboutModal v-model:visible="showAbout" />
+                        <AboutModal v-model:visible="showAboutModal" />
 
                     </cv-side-nav>
                 </template>
@@ -89,11 +89,9 @@
 
 .header-name {
     font-size: 1.5rem;
-    /* Adjust as needed */
 }
 
 .grey-text {
-    /* color: #5A6872; */
     color: #0f62fe;
 }
 

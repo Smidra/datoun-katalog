@@ -15,35 +15,41 @@
           na přehlednost a uživatelskou přívětivost nabízí Datoun širokou škálu
           funkcí a možností pro efektivní procházení produktů vyráběných v České republice.
         </p>
+
         <div class="about-section">
-      <a href="https://discord.com" class="about-button">Discord</a>
-      <a href="https://github.com/Smidra/datoun-katalog" class="about-button">Git hub</a>
-      <a href="https://docs.google.com/spreadsheets/d/1AEe_-kzGD-3siz9b7oaILM2IbTCpfKinbhFcpNSnlOg/edit#gid=0" class="about-button">Seznam firem</a>
-    </div>
+          <cv-button-set>
+            <cv-button @click="navigateTo('https://discord.com')"  kind="secondary" >Discord</cv-button>
+            <cv-button @click="navigateTo('https://github.com/Smidra/datoun-katalog')" kind="secondary">GitHub
+            </cv-button>
+            <cv-button
+                @click="navigateTo('https://docs.google.com/spreadsheets/d/1AEe_-kzGD-3siz9b7oaILM2IbTCpfKinbhFcpNSnlOg/edit#gid=0')"
+                kind="primary">Seznam firem
+            </cv-button>
+          </cv-button-set>
+        </div>
       </div>
     </template>
   </cv-modal>
 </template>
+
+<script>
+export default {
+  methods: {
+    navigateTo(url) {
+      if (typeof window !== 'undefined') {
+        window.open(url, '_blank');
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 
 .about-section {
   text-align: center;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 50px;
   max-width: 600px;
-}
-.about-button {
-  display: inline-block;
-  padding: 15px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  margin: 20px 40px 0 20px;
-  cursor: pointer;
-}
-.about-button:hover {
-  background-color: #0056b3;
 }
 </style>

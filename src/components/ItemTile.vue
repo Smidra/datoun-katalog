@@ -58,7 +58,7 @@ import IncompleteIcon from '@carbon/icons-vue/es/incomplete/16';
 import SuccessIcon from '@carbon/icons-vue/es/checkmark--filled/16';
 import LaunchIcon from '@carbon/icons-vue/es/launch/16';
 
-import { getLeaves, getUniqueBradcrumbs } from './KategorieTool.js';
+import { getLeaves, getUniqueBradcrumbs } from '../utils/KategorieTool.js';
 
 
 export default {
@@ -91,7 +91,7 @@ export default {
     data() {
         return {
             isModalOpen: false,
-            modalKey: 0, // Add this line
+            modalKey: 0,
             isEditModalOpen: false,
             editModalKey: 0,
         };
@@ -153,7 +153,6 @@ export default {
 
 .tile-logo {
     height: 35px;
-    /* height: 50px; */
 }
 
 .tile-body {
@@ -189,10 +188,6 @@ export default {
     flex-direction: column;
     justify-content: flex-end;
     /* aligns items to the bottom */
-}
-
-.tile-button {
-    white-space: nowrap;
 }
 
 @media (max-width: 600px) {
