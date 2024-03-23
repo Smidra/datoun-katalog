@@ -41,22 +41,7 @@
             </cv-header>
 
             <!-- Main Content -->
-            <main id="#main-content">
-                <div class="top-pagination">
-                    <ais-pagination>
-                        <template v-slot="{ nbHits }">
-                            <cv-pagination @change="onPaginationChange" :number-of-items="nbHits" :page="page" :pageSizes="[
-                                12, { 'value': 15, 'selected': true }, 24, 48]" pageSizesLabel="Firem na stránku:">
-                                <template v-slot:range-text="{ scope }">
-                                    <span>{{ scope.start }}-{{ scope.end }} ze {{ scope.items }}</span>
-                                </template>
-                                <template v-slot:of-n-pages="{ scope }">
-                                    <span>ze {{ scope.pages }} stránek</span>
-                                </template>
-                            </cv-pagination>
-                        </template>
-                    </ais-pagination>
-                </div>
+            <main id="#main-content" class="padding-top">
                 <ais-hits>
                     <template v-slot="{ items }">
                         <div class="tile-container">
@@ -64,6 +49,21 @@
                         </div>
                     </template>
                 </ais-hits>
+              <div class="top-pagination">
+                <ais-pagination>
+                  <template v-slot="{ nbHits }">
+                    <cv-pagination @change="onPaginationChange" :number-of-items="nbHits" :page="page" :pageSizes="[
+                                12, { 'value': 12, 'selected': true }, 24, 48]" pageSizesLabel="Firem na stránku:">
+                      <template v-slot:range-text="{ scope }">
+                        <span>{{ scope.start }}-{{ scope.end }} ze {{ scope.items }}</span>
+                      </template>
+                      <template v-slot:of-n-pages="{ scope }">
+                        <span>ze {{ scope.pages }} stránek</span>
+                      </template>
+                    </cv-pagination>
+                  </template>
+                </ais-pagination>
+              </div>
             </main>
 
         </ais-instant-search>
