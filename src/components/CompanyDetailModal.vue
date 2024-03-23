@@ -1,5 +1,5 @@
 <template>
-    <cv-modal ref="CompanyDetailModal" :visible="isOpen" @secondary-click="$emit('open-eshop', item.eshop)" @other-btn-click="$emit('edit')">
+    <cv-modal ref="CompanyDetailModal" :visible="isOpen" @secondary-click="handleOpenUrl(item.eshop)" @other-btn-click="$emit('edit')">
         <!-- Header of the modal -->
         <template v-slot:title>
             <div class="modal-title-container">
@@ -63,7 +63,7 @@
 
                 <!-- If there are aliases, show -->
                 <!-- <template v-if="(item.aliasy != undefined) && (item.aliasy.length > 0)"> -->
-                <template v-if="(item?.aliasy != undefined) && (item?.aliasy != '')">
+                <template v-if="(item?.aliasy !== undefined) && (item?.aliasy !== '')">
                     <h4>Značky & Aliasy</h4>
                     <p>{{ item?.aliasy }}</p>
                     <br />
@@ -92,7 +92,8 @@
 
 <script>
 import { CvModal, CvList, CvListItem } from '@carbon/vue';
-import { getUniqueBradcrumbs } from '../utils/KategorieTool.js';
+import { getUniqueBradcrumbs } from '@/utils/KategorieTool';
+import { handleOpenUrl } from '@/utils/URLtools';
 import LaunchIcon from '@carbon/icons-vue/es/launch/16';
 import EditIcon from '@carbon/icons-vue/es/edit/16';
 import UnknownIcon from '@carbon/icons-vue/es/unknown/16';
@@ -124,7 +125,9 @@ export default {
             default: () => ({})
         }
     },
-    methods: {},
+    methods: {
+        handleOpenUrl
+    },
     computed: {
         leaves() {
             return getUniqueBradcrumbs(this.item?.kategorie0, this.item?.kategorie1, this.item?.kategorie2);

@@ -3,10 +3,12 @@ import { AisInstantSearch, AisHits, AisHierarchicalMenu, AisConfigure, AisPagina
 import algoliasearch from 'algoliasearch';
 import HierarchicalMenu from './components/HierarchicalMenu.vue';
 import ItemTile from './components/ItemTile.vue';
-import Add16 from '@carbon/icons-vue/es/add/16';
 import EditModal from './components/EditModal.vue';
 import AboutModal from './components/AboutModal.vue';
 import CompanyDetailModal from "@/components/CompanyDetailModal.vue";
+import AddIcon from '@carbon/icons-vue/es/add--alt/16';
+import Crossroads from '@carbon/icons-vue/es/crossroads/16';
+
 export default {
     name: 'App',
     components: {
@@ -25,7 +27,8 @@ export default {
         AisConfigure,
         AisPagination,
         AisStateResults,
-        'add-icon': Add16,
+        AddIcon,
+        Crossroads,
         EditModal,
         AboutModal,
     },
@@ -79,8 +82,5 @@ export default {
         reloadPage() {
             location.reload();
         },
-        handleOpenEshop(url) {
-            window.open(url, '_blank');
-        }
     },
 };

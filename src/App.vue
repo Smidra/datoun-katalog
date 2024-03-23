@@ -26,13 +26,14 @@
             <hr class="custom-divider"/>
             <cv-button kind="ghost" class="grey-text" @click="handleCreateNew">
               Přidat novou firmu
-              <add-icon/>
+              <AddIcon/>
             </cv-button>
             <EditModal v-model:visible="showModal"/>
 
 
             <cv-button kind="ghost" class="grey-text" @click="showAboutModal = true">
-              O nás
+              Co je to Datoun?
+              <Crossroads />
             </cv-button>
             <AboutModal v-model:visible="showAboutModal"/>
 
@@ -48,7 +49,7 @@
             <div class="tile-container">
               <ItemTile v-for="item in items" :key="item.objectID" :item="item"
                         @open-company-detail="detailModalItem = $event; showDetailModal = true"
-                        @open-eshop="handleOpenEshop"/>
+                        @open-eshop="handleOpenUrl"/>
             </div>
           </template>
         </ais-hits>
@@ -73,8 +74,7 @@
 
     </ais-instant-search>
     <EditModal v-model:visible="showEditModal" :editedItem="editedItem"/>
-    <CompanyDetailModal v-model:visible="showDetailModal" :item="detailModalItem" @edit="handleEditOpen()"
-                        @open-eshop="handleOpenEshop"/>
+    <CompanyDetailModal v-model:visible="showDetailModal" :item="detailModalItem" @edit="handleEditOpen()"/>
     <AboutModal/>
   </div>
 </template>
