@@ -1,6 +1,10 @@
 # Datoun
 Datoun (DAtabáze TOváren U Nás) is project that maps all Companies that make stuff in Czechia. It is accessible for everyone for free at [https://datoun.cz](https://datoun.cz).
 
+## Help develop or fill Datoun
+All contributions welcome, join us at our [Discord server](https://discord.gg/aDbAabNUeJ). 
+If you want to fill datoun with data but dont knwo where to start get in touch on Discord. Our temporary database is in [Google sheets](https://docs.google.com/spreadsheets/d/1AEe_-kzGD-3siz9b7oaILM2IbTCpfKinbhFcpNSnlOg/edit?usp=sharing)
+
 ## Tech stack
 Datoun uses Vue3 with Carbon design system ([storybook](https://vue.carbondesignsystem.com/?path=/story/carbon--welcome), [website](https://carbondesignsystem.com/)). Backend is an [Algolia](https://dashboard.algolia.com/) database accessed through [Vue Instantsearch](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/vue/). 
 
@@ -34,7 +38,8 @@ Data is formatted as the following JSON, here comments are added to all fields.
     "Zdraví a drogerie"
   ],
   "kategorie1": [
-    "Zdraví a drogerie > Drogerie"
+    "Zdraví a drogerie > Drogerie",
+    "Zdraví a drogerie > Blbosti"
   ],
   "kategorie2": [
     "Zdraví a drogerie > Drogerie > Parfémy a voňavky"
@@ -71,15 +76,15 @@ Array of strings. Hierary is composed of strings separated by " > ". Company doe
 Example of simple allowed hierarchy.
 ```
 "kategorie0": [
-    "A1"
+    "A1",
     "A2"
 ],
 "kategorie1": [
-    "A1 > B1"
+    "A1 > B1",
     "A1 > B2"
 ],
 "kategorie2": [
-    "A1 > B1 > C1"
+    "A1 > B1 > C1",
     "A1 > B1 > C2"
 ],
 ```
@@ -134,7 +139,3 @@ String with URL. Link to the company eshop/website.
 
 ### logo
 String with URL. Link to the company logo.
-
-
-## Help develop Datoun
-All contributions welcome, join us at our [Discord server](https://discord.gg/aDbAabNUeJ).
